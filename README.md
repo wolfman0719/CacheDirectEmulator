@@ -8,11 +8,13 @@ Implemented the VisM.OCX interface for .Net Applications using IRIS .Net Native 
 ###IRIS Server 
 
 The version used is IRIS for Windows (x86-64) 2020.1 (Build 215U) Mon Mar 30 2020 20:14:33 EDT.
+
 In 2019.3 it will crash with a null pointer error.
 
 ### IRIS Server side class definition
 
 Importing CacheDirect.Emulator.cls into the appropriate namespace.
+
 (The sample console application assumes that the namespace is USER)
 
 ### Load C# Project file into Visual Studio
@@ -36,7 +38,9 @@ InterSystems.Data.Gateway64.exe
 ### Build
 
 Click Build C_SharpConsoleApplication from the Visual Studio build menu.
+
 Make sure there are no errors in the output window.
+
 If you get an error, there's something wrong with the reference settings being not working properly.
 
 ### run
