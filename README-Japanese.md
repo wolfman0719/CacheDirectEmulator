@@ -5,9 +5,10 @@ VisM.OCXのインタフェースを.Net上で動作するようにIRISの.Net Na
 
 ## 使用方法
 
-###IRISサーバー
+### IRISサーバー
 
 使用バージョンは、IRIS for Windows (x86-64) 2020.1 (Build 215U) Mon Mar 30 2020 20:14:33 EDTです。
+
 2019.3ではヌルポインターエラーでクラッシュします。
 
 ### IRISサーバー側のクラス
@@ -21,15 +22,17 @@ C_SharpConsoleApplication.csprojファイルをVisual Studioで読み込ます�
 使用したバージョンは、以下になります。
 
 Microsoft Visual Studio Community 2019
+
 Version 16.6.0
 
 ### 参照設定
 
 Visual Studioのプロジェクト設定から参照の追加を選び、以下のファイルを追加してください。
 
-<インストールディスク>\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319
+c:\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319
 
 InterSystems.Data.IRISClient.dll
+
 InterSystems.Data.Gateway64.exe
 
 ### ビルド
