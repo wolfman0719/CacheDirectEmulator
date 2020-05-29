@@ -30,7 +30,7 @@ Version 16.6.0
 
 Choose Add Reference from the project settings in Visual Studio and add the following files.
 
-<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319
+(InstallDir)\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319
 
 InterSystems.Data.IRISClient.dll
 InterSystems.Data.Gateway64.exe
