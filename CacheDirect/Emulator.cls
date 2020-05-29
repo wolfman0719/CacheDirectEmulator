@@ -117,67 +117,6 @@ Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P
  quit 1
 }
 
-Method ExecFlagSet(flag As %Integer) As %Status [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, Value, Code) ]
-{
- try {
-	  if 'flag quit
-
-      set Command = ..Code
-	  if ($extract(Command,1) = "=") {		   
-         set ecommand="Set %result="_$extract(Command,2,*)
-	  }
-      else {
-	         set ecommand = Command
-      }
-      set P0=..P0
-      set P1=..P1
-      set P2=..P2
-      set P3=..P3
-      set P4=..P4
-      set P5=..P5
-      set P6=..P6
-      set P7=..P7
-      set P8=..P8
-      set P9=..P9
-      set tPLIST=..PLIST
-      set PDELIM = ..PDELIM
-      for i = 1:1:$length(tPLIST,PDELIM) {
-	      set PLIST(i) = $piece(tPLIST,PDELIM,i)
-      }
-      set ..iErrorName = ""
-      set ..iError = 0
- 
-      xecute ecommand
-      
-      if $data(%result) set ..Value=%result
-      set ..P0 = P0
-      set ..P1 = P1
-      set ..P2 = P2
-      set ..P3 = P3
-      set ..P4 = P4
-      set ..P5 = P5
-      set ..P6 = P6
-      set ..P7 = P7
-      set ..P8 = P8
-      set ..P9 = P9
-      set tPLast = +$Order(PLIST(""),-1)
-      set tPLIST = $get(PLIST(1))
-      for i = 2:1:tPLast {
-	      set tPLIST = tPLIST_PDELIM_$get(PLIST(i))
-      }
-      set ..PLIST = tPLIST
-      set PLIST = $length(..PLIST,PDELIM)
- }
- catch error {
-	 set ..iErrorName = error.Name
-	 set ..iError = 1
- }
- if ..iError = 1 {
-	 quit '$$$OK
- }
- quit $$$OK
-}
-
 ClassMethod Version() As %String
 {
 	quit "V1.0.0"
