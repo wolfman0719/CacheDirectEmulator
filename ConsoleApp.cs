@@ -1,9 +1,5 @@
 using System;
 
-// Add the following using statement
-using InterSystems.Data.IRISClient;
-using InterSystems.Data.IRISClient.ADO;
-
 namespace cdapp
 {
 	/// <summary>
