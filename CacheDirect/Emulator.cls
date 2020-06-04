@@ -80,8 +80,10 @@ Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P
       set P9=..P9
       set tPLIST=..PLIST
       set PDELIM = ..PDELIM
-      for i = 1:1:$length(tPLIST,PDELIM) {
+      if tPLIST'="" {
+        for i = 1:1:$length(tPLIST,PDELIM) {
 	      set PLIST(i) = $piece(tPLIST,PDELIM,i)
+        }
       }
       set ..iErrorName = ""
       set ..iError = 0
@@ -112,14 +114,14 @@ Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P
 	 set ..iError = 1
  }
  if ..iError = 1 {
-	 quit 0
+	 quit '$$$OK
  }
- quit 1
+ quit $$$OK
 }
 
 ClassMethod Version() As %String
 {
-	quit "V1.0.0"
+	quit "V1.0.1"
 }
 
 }
