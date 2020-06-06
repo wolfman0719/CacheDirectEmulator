@@ -87,7 +87,7 @@ namespace cdapp
             set { this.pdelim = value; }
             get { return this.pdelim; }
         }
-        public string Value
+        public string VALUE
         {
             set { this.value = value; }
             get { return this.value; }
@@ -344,18 +344,18 @@ namespace cdapp
                 }
             }
 
-            if (cd.Get("Value") is string)
+            if (cd.Get("VALUE") is string)
             {
-                value = (string)cd.Get("Value");
+                value = (string)cd.Get("VALUE");
             }
             else
             {
-                if (cd.Get("Value") is null)
+                if (cd.Get("VALUE") is null)
                 {
                 }
                 else
                 {
-                    value = cd.Get("Value").ToString();
+                    value = cd.Get("VALUE").ToString();
                 }
             }
 
@@ -371,6 +371,13 @@ namespace cdapp
            string[] PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
 
            return PLISTArray[index -1];
+        }
+        public long getPLISTLength()
+        {
+
+            string[] PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
+
+            return PLISTArray.Length;
         }
 
         public Boolean setPLIST(int index, string replace) {

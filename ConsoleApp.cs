@@ -1,5 +1,7 @@
 using System;
 
+// Add the following using statement
+
 namespace cdapp
 {
 	/// <summary>
@@ -30,7 +32,20 @@ namespace cdapp
 
                 Console.Write("P1 = " + cdw.P1);
                 Console.Write("\n");
-                Console.Write("Value = " + cdw.Value);
+                Console.Write("VALUE = " + cdw.VALUE);
+                Console.Write("\n");
+                Console.Write("ErrorName = " + cdw.ErrorName);
+                Console.Write("\n");
+
+                cdw.P0 = "‚ ‚¢‚¤‚¦‚¨;‚©‚«‚­‚¯‚±;‚³‚µ‚·‚¹‚»";
+                cdw.P1 = ";";
+                cdw.PDELIM = ";";
+
+                cdw.Execute("=$PIECE(P0,P1,2)");
+
+                Console.Write("P1 = " + cdw.P1);
+                Console.Write("\n");
+                Console.Write("VALUE = " + cdw.VALUE);
                 Console.Write("\n");
                 Console.Write("ErrorName = " + cdw.ErrorName);
                 Console.Write("\n");
@@ -42,6 +57,8 @@ namespace cdapp
                 Console.Write("PLIST(2) = " + cdw.getPLIST(2));
                 Console.Write("\n");
                 Console.Write("PLIST(3) = " + cdw.getPLIST(3));
+                Console.Write("\n");
+                Console.Write("PLIST # = " + cdw.getPLISTLength());
                 Console.Write("\n");
                 Console.Write("PLIST = " + cdw.PLIST);
                 Console.Write("\n");

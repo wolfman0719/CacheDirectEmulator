@@ -48,7 +48,51 @@ Visual Studioのデバッグメニューからデバッグなしで実行をク�
 
 ## 制限事項
 
+### サポートしていないプロパティ
+
+ConnectionState
+ConTag
+ElapsedTime
+ErrorTrap
+Interval
+KeepAliveInterval
+KeepAliveTimeOut
+LogMask
+MServer
+MsgText
+NameSpace
+PromptInterval
+Server
+Tag
+TimeOut
+
+ExecFlag = 2 と 3 はサポートしていません
+
+### サポートしていないメソッド
+
+DeleteConnection
+SetMServer
+SetServer
+
+VisM Eventsはサポートしていません
+
+### サポートされない追加機能
+
+ErrorTrapping
+
+The Keep Alive Feature
+
+Server Read Loop and Quick Check
+
+Read and Write Hooks
+
+Other Server Side Hooks
+
+User Cancel Option
+
+### Visual Basic依存機能
+
 Cache Directの機能の中で、Visual Basicの固有の機能は、サポートしていません。
 
-コールバック機能、MessageBoxなど
+コールバック機能、MessageBox, DoEventsなど
 
