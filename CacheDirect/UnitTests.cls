@@ -24,12 +24,12 @@ Method TestCacheDirect() [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9,
 	do cd.Execute("=$piece(P0,P1,2)")
 	Do $$$AssertEquals(cd.P0,P0,"Property P0 is correct")
 	Do $$$AssertEquals(cd.P1,P1,"Property P1 is correct")
-	Do $$$AssertEquals(cd.Value,"DEF","Property Value is correct")
+	Do $$$AssertEquals(cd.VALUE,"DEF","Property VALUE is correct")
 
 	set cd.P2 = "あいうえお;かきくけこ;さしすせそ"
 	do cd.Execute("=$piece(P2,P1,3)")
 	Do $$$AssertEquals(cd.P2,P2,"Property P2 is correct")
-	Do $$$AssertEquals(cd.Value,"さしすせそ","Property Value is correct")
+	Do $$$AssertEquals(cd.VALUE,"さしすせそ","Property VALUE is correct")
 
 	set cd.P3 = "ABC;DEF;FGH"
 	do cd.Execute("=$piece(P3,P1,2)")
@@ -60,15 +60,32 @@ Method TestCacheDirect() [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9,
 	Do $$$AssertEquals(cd.P9,P9,"Property P9 is correct")
 
     set cd.PDELIM = ","
+    set cd.PLIST = ""
+	do cd.Execute("set PLIST(1) = ""ABC"",PLIST(2) = ""ZZZ"",PLIST(3) = ""あいうえお""")
+	Do $$$AssertEquals(cd.PLIST,"ABC,ZZZ,あいうえお","Property PLIST is correct")
+	Do $$$AssertEquals(PLIST,3,"variable PLIST is correct")
+	
+    set cd.PDELIM = "^"
+    set cd.PLIST = ""
+	do cd.Execute("set PLIST="""",PLIST(""first"") = ""ABC"",PLIST(""second"") = ""ZZZ"",PLIST(""third"") = ""あいうえお""")
+	Do $$$AssertEquals(cd.PLIST,"ABC^ZZZ^あいうえお","Property PLIST is correct")
+	Do $$$AssertEquals(PLIST,3,"variable PLIST is correct")
+
+    set cd.PDELIM = "$"
+    set cd.PLIST = ""
+    set PLIST = 2
 	set PLIST(1) = "ABC"
 	set PLIST(2) = "ZZZ"
 	set PLIST(3) = "あいうえお"
-	do cd.Execute("set A=1")
-	do cd.Execute("=PLIST")
-	Do $$$AssertEquals(cd.PLIST,"ABC,ZZZ,あいうえお","Property PLIST is correct")
-	Do $$$AssertEquals(PLIST,3,"variable PLIST is correct")
-	Do $$$AssertEquals(cd.Value,3,"Property Value is correct")
-	
+	do cd.Execute("set PLIST=2,PLIST(1) = ""ABC"",PLIST(2) = ""ZZZ"",PLIST(3) = ""あいうえお""")
+	Do $$$AssertEquals(cd.PLIST,"ABC$ZZZ","Property PLIST is correct")
+	Do $$$AssertEquals(PLIST,2,"variable PLIST is correct")
+
+	do cd.Execute("$extract($ZV,1,4)")
+	Do $$$AssertEquals(cd.VALUE,"IRIS","Property VALUE is correct")
+
+	do cd.Execute("=$extract($ZV,1,4)")
+	Do $$$AssertEquals(cd.VALUE,"IRIS","Property VALUE is correct")
 	kill cd
 }
 

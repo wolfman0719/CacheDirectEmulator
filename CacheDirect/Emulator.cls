@@ -23,7 +23,7 @@ Property P9 As %String(MAXLEN = 32000, TRUNCATE = 1);
 
 Property Code As %String(MAXLEN = 32000, TRUNCATE = 1);
 
-Property Value As %String(MAXLEN = 32000, TRUNCATE = 1);
+Property VALUE As %String(MAXLEN = 32000, TRUNCATE = 1);
 
 Property PLIST As %String(MAXLEN = 32000, TRUNCATE = 1);
 
@@ -59,12 +59,15 @@ Method setPLIST(offset As %Integer, value As %String)
 	set $piece(..PLIST,..PDELIM,offset) = value
 }
 
-Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, Value, Code) ]
+Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, VALUE, Code) ]
 {
  try {
 	  if ($extract(Command,1) = "=") {		   
-         set ecommand="Set %result="_$extract(Command,2,*)
+         set ecommand="Set VALUE="_$extract(Command,2,*)
 	  }
+      elseif ($extract(Command,1) = "$") {
+         set ecommand="Set VALUE="_Command
+      }
       else {
 	         set ecommand = Command
       }
@@ -78,6 +81,8 @@ Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P
       set P7=..P7
       set P8=..P8
       set P9=..P9
+      set VALUE =..VALUE
+      kill PLIST
       set tPLIST=..PLIST
       set PDELIM = ..PDELIM
       if tPLIST'="" {
@@ -90,7 +95,22 @@ Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P
  
       xecute ecommand
       
-      if $data(%result) set ..Value=%result
+	  do ..PropertyRestore()
+ }
+ catch error {
+	 do ..PropertyRestore()
+	 set ..iErrorName = error.Name
+	 set ..iError = 1
+ }
+ if ..iError = 1 {
+	 quit '$$$OK
+ }
+ quit $$$OK
+}
+
+Method PropertyRestore() As %Status [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, VALUE, Code) ]
+{
+      if $data(VALUE) set ..VALUE=VALUE
       set ..P0 = P0
       set ..P1 = P1
       set ..P2 = P2
@@ -101,27 +121,24 @@ Method Execute(Command As %String) As %Boolean [ PublicList = (P0, P1, P2, P3, P
       set ..P7 = P7
       set ..P8 = P8
       set ..P9 = P9
-      set tPLast = +$Order(PLIST(""),-1)
-      set tPLIST = $get(PLIST(1))
-      for i = 2:1:tPLast {
-	      set tPLIST = tPLIST_PDELIM_$get(PLIST(i))
+      kill plist
+      set node = "",plistcount = 0
+      for {
+	      set node = $order(PLIST(node))
+	      if node = "" quit
+	      set plistcount = plistcount + 1
+	      set plist(plistcount) = PLIST(node)
       }
-      set ..PLIST = tPLIST
-      set PLIST = $length(..PLIST,PDELIM)
- }
- catch error {
-	 set ..iErrorName = error.Name
-	 set ..iError = 1
- }
- if ..iError = 1 {
-	 quit '$$$OK
- }
- quit $$$OK
+      if +$get(PLIST) = 0 set PLIST = plistcount
+      for i = 1:1:PLIST {
+	      set PLISTS = $get(PLISTS)_PDELIM_$get(plist(i))
+      }
+      set ..PLIST = $extract($get(PLISTS),2,*)
 }
 
 ClassMethod Version() As %String
 {
-	quit "V1.0.1"
+	quit "V1.0.4"
 }
 
 }
