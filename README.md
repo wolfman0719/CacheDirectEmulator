@@ -31,12 +31,15 @@ Choose Add Reference from the project settings in Visual Studio and add the foll
 <InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319
 
 InterSystems.Data.IRISClient.dll
+
 InterSystems.Data.Gateway64.exe
 
 ### Build
 
 Click Build C_SharpConsoleApplication from the Visual Studio build menu.
+
 Make sure there are no errors in the output window.
+
 If you get an error, there's something wrong with the reference settings being not working properly.
 
 ### run
@@ -49,19 +52,33 @@ From the Visual Studio debug menu, click Run without debugging.
 ### Unsupported Property
 
 ConnectionState
+
 ConTag
+
 ElapsedTime
+
 ErrorTrap
+
 Interval
+
 KeepAliveInterval
+
 KeepAliveTimeOut
+
 LogMask
+
 MServer
+
 MsgText
+
 NameSpace
+
 PromptInterval
+
 Server
+
 Tag
+
 TimeOut
 
 ExecFlag = 2 and 3 are not supported
@@ -69,7 +86,9 @@ ExecFlag = 2 and 3 are not supported
 ### Unsupported Method
 
 DeleteConnection
+
 SetMServer
+
 SetServer
 
 VisM Events are not supported
