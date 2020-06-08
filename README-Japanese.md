@@ -38,7 +38,9 @@ InterSystems.Data.Gateway64.exe
 ### ビルド
 
 Visual StudioのビルドメニューからC_SharpConsoleApplicationのビルドをクリック
+
 出力ウィンドウにエラーがないことを確認してください。
+
 エラーが出る場合は、参照設定がうまくいっていない可能性が高いです。
 
 ### 実行
@@ -51,19 +53,33 @@ Visual Studioのデバッグメニューからデバッグなしで実行をク�
 ### サポートしていないプロパティ
 
 ConnectionState
+
 ConTag
+
 ElapsedTime
+
 ErrorTrap
+
 Interval
+
 KeepAliveInterval
+
 KeepAliveTimeOut
+
 LogMask
+
 MServer
+
 MsgText
+
 NameSpace
+
 PromptInterval
+
 Server
+
 Tag
+
 TimeOut
 
 ExecFlag = 2 と 3 はサポートしていません
@@ -71,7 +87,9 @@ ExecFlag = 2 と 3 はサポートしていません
 ### サポートしていないメソッド
 
 DeleteConnection
+
 SetMServer
+
 SetServer
 
 VisM Eventsはサポートしていません
