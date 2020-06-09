@@ -45,7 +45,7 @@ Visual StudioのビルドメニューからC_SharpConsoleApplicationのビルド
 
 ### 実行
 
-Visual Studioのデバッグメニューからデバッグなしで実行をクリックします。
+Visual Studioのデバッグメニューからデバッグの開始をクリックします。
 
 
 ## 制限事項
@@ -59,8 +59,6 @@ ConTag
 ElapsedTime
 
 ErrorTrap
-
-Interval
 
 KeepAliveInterval
 
@@ -82,8 +80,6 @@ Tag
 
 TimeOut
 
-ExecFlag = 2 と 3 はサポートしていません
-
 ### サポートしていないメソッド
 
 DeleteConnection
@@ -92,7 +88,7 @@ SetMServer
 
 SetServer
 
-VisM Eventsはサポートしていません
+Shutdown Eventsはサポートしていません
 
 ### サポートされない追加機能
 

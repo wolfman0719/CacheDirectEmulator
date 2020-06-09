@@ -44,7 +44,7 @@ If you get an error, there's something wrong with the reference settings being n
 
 ### run
 
-From the Visual Studio debug menu, click Run without debugging.
+From the Visual Studio debug menu, click Start Debugging.
 
 
 ## Unsupported features
@@ -58,8 +58,6 @@ ConTag
 ElapsedTime
 
 ErrorTrap
-
-Interval
 
 KeepAliveInterval
 
@@ -81,8 +79,6 @@ Tag
 
 TimeOut
 
-ExecFlag = 2 and 3 are not supported
-
 ### Unsupported Method
 
 DeleteConnection
@@ -91,7 +87,7 @@ SetMServer
 
 SetServer
 
-VisM Events are not supported
+Shutdown Event
 
 ### Unsupported Additinal features
 

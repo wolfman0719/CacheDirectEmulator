@@ -1,4 +1,6 @@
 using System;
+using System.Diagnostics;
+using System.Timers;
 using InterSystems.Data.IRISClient;
 using InterSystems.Data.IRISClient.ADO;
 
@@ -8,6 +10,10 @@ namespace cdapp
     {
         public IRISConnection conn = new IRISConnection();
         public IRISObject cd;
+        public event EventHandler ErrorEvent;
+        public event EventHandler ExecuteEvent;
+
+        private System.Timers.Timer timer = new System.Timers.Timer();
 
         private string p0;
         private string p1;
@@ -26,6 +32,24 @@ namespace cdapp
         private long execflag;
         private string errorname;
         private long error;
+        private long interval;
+
+       private void Exec3(object source, ElapsedEventArgs e) {
+            timer.Stop();
+            this.Execute(this.code);
+            this.execflag = 0;
+       }
+
+
+    protected virtual void OnError(EventArgs e)
+        {
+            ErrorEvent?.Invoke(this, e); 
+        }
+
+        protected virtual void Executed(EventArgs e)
+        {
+            ExecuteEvent?.Invoke(this, e);
+        }
 
         public string P0
         {
@@ -90,7 +114,14 @@ namespace cdapp
         public string VALUE
         {
             set { this.value = value; }
-            get { return this.value; }
+            get {
+                if (this.execflag == 2)
+                {
+                    this.Execute(this.code);
+                    this.execflag = 0;
+                }
+                return this.value; 
+            }
         }
         public string Code
         {
@@ -101,11 +132,36 @@ namespace cdapp
         {
             set {
                 this.execflag = value;
-                if (value == 1) {
+                if (value == 1)
+                {
                     this.Execute(this.code);
+                    this.execflag = 0;
+                }
+                else if (value == 2)
+                {
+                }
+                else if (value == 3)
+                {
+                    timer.Interval = this.interval;
+                    timer.AutoReset = true;
+                    timer.Enabled = true;
+                    timer.Elapsed += new ElapsedEventHandler(Exec3);
+
+                    // タイマーを開始する
+                    timer.Start();
+
                 }
             }
             get { return this.execflag; }
+        }
+
+        public long Interval
+        {
+            set
+            {
+                this.interval = value;
+            }
+            get { return this.interval; }
         }
         public string ErrorName
         {
@@ -170,10 +226,7 @@ namespace cdapp
                 p0 = (string)cd.Get("P0");
             }
             else {
-                if (cd.Get("P0") is null)
-                {
-                }
-                else
+                if (cd.Get("P0") != null)
                 {
                     p0 = cd.Get("P0").ToString();
                 }
@@ -185,10 +238,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P1") is null)
-                {
-                }
-                else
+                if (cd.Get("P1") != null)
                 {
                     p1 = cd.Get("P1").ToString();
                 }
@@ -200,10 +250,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P2") is null)
-                {
-                }
-                else
+                if (cd.Get("P2") != null)
                 {
                     p2 = cd.Get("P2").ToString();
                 }
@@ -215,10 +262,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P3") is null)
-                {
-                }
-                else
+                if (cd.Get("P3") != null)
                 {
                     p3 = cd.Get("P3").ToString();
                 }
@@ -230,10 +274,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P4") is null)
-                {
-                }
-                else
+                if (cd.Get("P4") != null)
                 {
                     p4 = cd.Get("P4").ToString();
                 }
@@ -245,10 +286,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P5") is null)
-                {
-                }
-                else
+                if (cd.Get("P5") != null)
                 {
                     p5 = cd.Get("P5").ToString();
                 }
@@ -260,10 +298,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P6") is null)
-                {
-                }
-                else
+                if (cd.Get("P6") != null)
                 {
                     p6 = cd.Get("P6").ToString();
                 }
@@ -275,10 +310,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P7") is null)
-                {
-                }
-                else
+                if (cd.Get("P7") != null)
                 {
                     p7 = cd.Get("P7").ToString();
                 }
@@ -290,10 +322,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P8") is null)
-                {
-                }
-                else
+                if (cd.Get("P8") != null)
                 {
                     p8 = cd.Get("P8").ToString();
                 }
@@ -305,10 +334,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("P9") is null)
-                {
-                }
-                else
+                if (cd.Get("P9") != null)
                 {
                     p9 = cd.Get("P9").ToString();
                 }
@@ -320,10 +346,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("PLIST") is null)
-                {
-                }
-                else
+                if (cd.Get("PLIST") != null)
                 {
                     plist = cd.Get("PLIST").ToString();
                 }
@@ -335,10 +358,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("PDELIM") is null)
-                {
-                }
-                else
+                if (cd.Get("PDELIM") != null)
                 {
                     pdelim = cd.Get("PDELIM").ToString();
                 }
@@ -350,10 +370,7 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("VALUE") is null)
-                {
-                }
-                else
+                if (cd.Get("VALUE") != null)
                 {
                     value = cd.Get("VALUE").ToString();
                 }
@@ -362,6 +379,12 @@ namespace cdapp
             errorname =(string) cd.Get("ErrorName");
             error = (long)cd.Get("Error");
 
+            if (error == 1)
+            {
+                OnError(EventArgs.Empty);
+            }
+
+            Executed(EventArgs.Empty);
 
             return status;
         }

@@ -77,13 +77,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="InterSystems.Data.CacheClient, Version=2.0.0.2, Culture=neutral, PublicKeyToken=ad350a26c4a4447c, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>C:\InterSystems\HealthShare\dev\dotnet\bin\v4.0.30319\InterSystems.Data.CacheClient.dll</HintPath>
-    </Reference>
-    <Reference Include="InterSystems.Data.Gateway">
-      <HintPath>..\..\..\..\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319\InterSystems.Data.Gateway.exe</HintPath>
-    </Reference>
     <Reference Include="InterSystems.Data.Gateway64">
       <HintPath>..\..\..\..\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319\InterSystems.Data.Gateway64.exe</HintPath>
     </Reference>
@@ -106,6 +99,7 @@
     <Compile Include="ConsoleApp.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="TimerTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
