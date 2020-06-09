@@ -73,13 +73,19 @@ Method TestCacheDirect() [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9,
 
     set cd.PDELIM = "$"
     set cd.PLIST = ""
-    set PLIST = 2
-	set PLIST(1) = "ABC"
-	set PLIST(2) = "ZZZ"
-	set PLIST(3) = "あいうえお"
 	do cd.Execute("set PLIST=2,PLIST(1) = ""ABC"",PLIST(2) = ""ZZZ"",PLIST(3) = ""あいうえお""")
 	Do $$$AssertEquals(cd.PLIST,"ABC$ZZZ","Property PLIST is correct")
 	Do $$$AssertEquals(PLIST,2,"variable PLIST is correct")
+
+    set cd.PDELIM = "^"
+    set cd.PLIST = ""
+    set PLIST = 5
+	set PLIST(1) = "ABC"
+	set PLIST(3) = "ZZZ"
+	set PLIST(5) = "あいうえお"
+	do cd.Execute("set PLIST=5,PLIST(1) = ""ABC"",PLIST(3) = ""ZZZ"",PLIST(5) = ""あいうえお""")
+	Do $$$AssertEquals(cd.PLIST,"ABC^^ZZZ^^あいうえお","Property PLIST is correct")
+	Do $$$AssertEquals(PLIST,5,"variable PLIST is correct")
 
 	do cd.Execute("$extract($ZV,1,4)")
 	Do $$$AssertEquals(cd.VALUE,"IRIS","Property VALUE is correct")

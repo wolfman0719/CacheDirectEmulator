@@ -39,6 +39,8 @@ Property ErrorName As %String [ Calculated, ReadOnly ];
 
 Property Error As %Integer [ Calculated, ReadOnly ];
 
+Property Interval As %Integer;
+
 Method ErrorNameGet() As %String
 {
 	quit ..iErrorName
@@ -129,16 +131,24 @@ Method PropertyRestore() As %Status [ PublicList = (P0, P1, P2, P3, P4, P5, P6, 
 	      set plistcount = plistcount + 1
 	      set plist(plistcount) = PLIST(node)
       }
-      if +$get(PLIST) = 0 set PLIST = plistcount
-      for i = 1:1:PLIST {
-	      set PLISTS = $get(PLISTS)_PDELIM_$get(plist(i))
+      if +$get(PLIST) = 0 {
+	     set PLIST = plistcount
+         for i = 1:1:PLIST {
+	       set PLISTS = $get(PLISTS)_PDELIM_$get(plist(i))
+         }
+         set ..PLIST = $extract($get(PLISTS),2,*)
       }
-      set ..PLIST = $extract($get(PLISTS),2,*)
+      else {
+         for i = 1:1:PLIST {
+	       set PLISTS = $get(PLISTS)_PDELIM_$get(PLIST(i))
+         }
+         set ..PLIST = $extract($get(PLISTS),2,*)
+      }
 }
 
 ClassMethod Version() As %String
 {
-	quit "V1.0.4"
+	quit "V1.1"
 }
 
 }
