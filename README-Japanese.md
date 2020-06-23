@@ -47,6 +47,29 @@ Visual StudioのビルドメニューからC_SharpConsoleApplicationのビルド
 
 Visual Studioのデバッグメニューからデバッグの開始をクリックします。
 
+このアプリケーションを終了するには、任意のキーを押す必要があります。
+
+アプリケーションの出力結果は、Visual Studioの出力ウィンドウに表示されます。
+
+### VB.Net用サンプル
+
+Module1.vbは、このエミュレータを使用するVB.Netサンプルコードです。
+
+このサンプルを動かすには、
+
+1. C# class libraryプロジェクトを作成します。
+
+2. cacheDirectWapper.csをそのプロジェクトに追加します。の
+
+3. InterSystems.Data.Gateway64.exeとInterSystems.Data.IRISClient.dllの参照を追加します。
+
+4. プロジェクトをビルドします。
+
+5. VB.Net コンソールアプリケーションプロジェクトを作成します。
+
+6. Module1.vbをプロジェクトに追加します。
+
+7.  4. で作成したクラスライブラリーdllの参照をプロジェクトに追加します。
 
 ## 制限事項
 
