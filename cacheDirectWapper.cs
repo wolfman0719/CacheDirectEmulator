@@ -34,16 +34,17 @@ namespace cdapp
         private long error;
         private long interval;
 
-       private void Exec3(object source, ElapsedEventArgs e) {
+        private void Exec3(object source, ElapsedEventArgs e)
+        {
             timer.Stop();
             this.Execute(this.code);
             this.execflag = 0;
-       }
+        }
 
 
-    protected virtual void OnError(EventArgs e)
+        protected virtual void OnError(EventArgs e)
         {
-            ErrorEvent?.Invoke(this, e); 
+            ErrorEvent?.Invoke(this, e);
         }
 
         protected virtual void Executed(EventArgs e)
@@ -114,13 +115,14 @@ namespace cdapp
         public string VALUE
         {
             set { this.value = value; }
-            get {
+            get
+            {
                 if (this.execflag == 2)
                 {
                     this.Execute(this.code);
                     this.execflag = 0;
                 }
-                return this.value; 
+                return this.value;
             }
         }
         public string Code
@@ -130,7 +132,8 @@ namespace cdapp
         }
         public long ExecFlag
         {
-            set {
+            set
+            {
                 this.execflag = value;
                 if (value == 1)
                 {
@@ -177,7 +180,7 @@ namespace cdapp
         {
             try
             {
-               
+
                 conn.ConnectionString = constr;
                 conn.Open();
                 IRIS iris = IRIS.CreateIRIS(conn);
@@ -189,7 +192,8 @@ namespace cdapp
             }
         }
 
-        public Boolean end() {
+        public Boolean end()
+        {
 
             try
             {
@@ -225,7 +229,8 @@ namespace cdapp
             {
                 p0 = (string)cd.Get("P0");
             }
-            else {
+            else
+            {
                 if (cd.Get("P0") != null)
                 {
                     p0 = cd.Get("P0").ToString();
@@ -376,7 +381,7 @@ namespace cdapp
                 }
             }
 
-            errorname =(string) cd.Get("ErrorName");
+            errorname = (string)cd.Get("ErrorName");
             error = (long)cd.Get("Error");
 
             if (error == 1)
@@ -389,27 +394,59 @@ namespace cdapp
             return status;
         }
 
-        public string getPLIST(int index) {
+        public string getPLIST(int index)
+        {
+            string[] PLISTArray = { "" };
 
-           string[] PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
+            if (cd.Get("PLIST") is string)
+            {
+                string plist = (string)cd.Get("PLIST");
+                PLISTArray = plist.Split(cd.Get("PDELIM").ToString().ToCharArray());
 
-           return PLISTArray[index -1];
+            }
+            else {
+                if (cd.Get("PLIST") != null)
+                {
+
+                   PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
+                }
+
+            }
+
+
+            return PLISTArray[index - 1];
         }
         public long getPLISTLength()
         {
+            string[] PLISTArray = { "" };
 
-            string[] PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
+            if (cd.Get("PLIST") is string)
+            {
+                string plist = (string)cd.Get("PLIST");
+                PLISTArray = plist.Split(cd.Get("PDELIM").ToString().ToCharArray());
+
+            }
+            else
+            {
+                if (cd.Get("PLIST") != null)
+                {
+
+                    PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
+                }
+
+            }
 
             return PLISTArray.Length;
         }
 
-        public Boolean setPLIST(int index, string replace) {
+        public Boolean setPLIST(int index, string replace)
+        {
 
-           string[] PLISTArray = cd.Get("PLIST").ToString().Split((cd.Get("PDELIM").ToString().ToCharArray()));
+            string[] PLISTArray = cd.Get("PLIST").ToString().Split((cd.Get("PDELIM").ToString().ToCharArray()));
 
-           PLISTArray[index - 1] = replace;
-           cd.Set("PLIST", string.Join(cd.Get("PDELIM").ToString(), PLISTArray));
-           return true;
+            PLISTArray[index - 1] = replace;
+            cd.Set("PLIST", string.Join(cd.Get("PDELIM").ToString(), PLISTArray));
+            return true;
         }
-   }
+    }
 }
