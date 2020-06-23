@@ -59,8 +59,8 @@ to run the sample
 3. add references to InterSystems.Data.Gateway64.exe and InterSystems.Data.IRISClient.dll
 4. build the project
 4. create a VB.Net console application project
+5. add Module1.vb to the project
 5. add a refernce to the class library dll 
-
 
 ## Unsupported features
 
