@@ -45,6 +45,21 @@ If you get an error, there's something wrong with the reference settings being n
 ### run
 
 From the Visual Studio debug menu, click Start Debugging.
+you need to press any key to finish the sample application
+you can see the program output in the Visual STudio output window
+
+### for VB.Net
+
+Module1.vb is a samle VB.Net code to use the emulator.
+
+to run the sample
+
+1. create a c# class library project
+2. add cacheDirectWapper.cs to the project
+3. add references to InterSystems.Data.Gateway64.exe and InterSystems.Data.IRISClient.dll
+4. build the project
+4. create a VB.Net console application project
+5. add a refernce to the class library dll 
 
 
 ## Unsupported features
