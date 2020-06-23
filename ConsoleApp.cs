@@ -64,7 +64,7 @@ namespace cdapp
                 Debug.Print("PLIST(1) = " + cdw.getPLIST(1));
                 Debug.Print("PLIST(2) = " + cdw.getPLIST(2));
                 Debug.Print("PLIST(3) = " + cdw.getPLIST(3));
-                Debug.Print("PLIST # = " + cdw.getPLISTLength());
+                Debug.Print("PLIST # = " + cdw.getPLISTLength().ToString());
                 Debug.Print("PLIST = " + cdw.PLIST);
                 Debug.Print("ErrorName = " + cdw.ErrorName);
                 Debug.Print("\n");
@@ -82,6 +82,7 @@ namespace cdapp
                 cdw.ExecFlag = 3;
 
                 Console.WriteLine("Waiting for 5 seconds till the timer expires ");
+                Console.WriteLine("If 5 seconds passed, Please press any key");
                 Console.ReadLine();
 
                 Debug.Print("P0 = " + cdw.P0);
