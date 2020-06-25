@@ -33,6 +33,7 @@ namespace cdapp
         private string errorname;
         private long error;
         private long interval;
+        private string inamespace;
 
         private void Exec3(object source, ElapsedEventArgs e)
         {
@@ -158,6 +159,19 @@ namespace cdapp
             get { return this.execflag; }
         }
 
+        public string NameSpace
+        {
+            set
+            {
+                this.inamespace = value;
+                this.Execute("set $namespace=" + "" + value + "");
+            }
+            get
+            {
+                this.Execute("=$namespace");
+                return this.VALUE;
+            }
+        }
         public long Interval
         {
             set
@@ -441,11 +455,40 @@ namespace cdapp
 
         public Boolean setPLIST(int index, string replace)
         {
+            string[] PLISTArray = { "" };
 
-            string[] PLISTArray = cd.Get("PLIST").ToString().Split((cd.Get("PDELIM").ToString().ToCharArray()));
+            if (cd.Get("PLIST") is string)
+            {
+                string plist = (string)cd.Get("PLIST");
+                PLISTArray = plist.ToString().Split((cd.Get("PDELIM").ToString().ToCharArray()));
+            }
+            else
+            {
+                if (cd.Get("PLIST") != null)
+                {
 
-            PLISTArray[index - 1] = replace;
-            cd.Set("PLIST", string.Join(cd.Get("PDELIM").ToString(), PLISTArray));
+                    PLISTArray = cd.Get("PLIST").ToString().Split((cd.Get("PDELIM").ToString().ToCharArray()));
+                }
+            }
+
+            if (index <= PLISTArray.Length)
+            {
+                PLISTArray[index - 1] = replace;
+                cd.Set("PLIST", string.Join(cd.Get("PDELIM").ToString(), PLISTArray));
+            }
+
+            if (cd.Get("PLIST") is string)
+            {
+                plist = (string)cd.Get("PLIST");
+            }
+            else
+            {
+                if (cd.Get("PLIST") != null)
+                {
+                    plist = cd.Get("PLIST").ToString();
+                }
+            }
+
             return true;
         }
     }
