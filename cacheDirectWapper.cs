@@ -9,6 +9,7 @@ namespace cdapp
     public class cacheDirectWapper
     {
         public IRISConnection conn = new IRISConnection();
+        public IRIS iris;
         public IRISObject cd;
         public event EventHandler ErrorEvent;
         public event EventHandler ExecuteEvent;
@@ -43,14 +44,14 @@ namespace cdapp
         }
 
 
-        protected virtual void OnError(EventArgs e)
+        protected virtual void OnError()
         {
-            ErrorEvent?.Invoke(this, e);
+            ErrorEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        protected virtual void Executed(EventArgs e)
+        protected virtual void Executed()
         {
-            ExecuteEvent?.Invoke(this, e);
+            ExecuteEvent?.Invoke(this, EventArgs.Empty);
         }
 
         public string P0
@@ -168,8 +169,9 @@ namespace cdapp
             }
             get
             {
-                this.Execute("=$namespace");
-                return this.VALUE;
+                //this.Execute("=$namespace");
+                //return this.VALUE;
+                return iris.ClassMethodString("CacheDirect.Emulator", "GetNamespace");
             }
         }
         public long Interval
@@ -197,7 +199,7 @@ namespace cdapp
 
                 conn.ConnectionString = constr;
                 conn.Open();
-                IRIS iris = IRIS.CreateIRIS(conn);
+                iris = IRIS.CreateIRIS(conn);
                 cd = (IRISObject)iris.ClassMethodObject("CacheDirect.Emulator", "%New");
 
             }
@@ -400,10 +402,10 @@ namespace cdapp
 
             if (error == 1)
             {
-                OnError(EventArgs.Empty);
+                OnError();
             }
 
-            Executed(EventArgs.Empty);
+            Executed();
 
             return status;
         }
