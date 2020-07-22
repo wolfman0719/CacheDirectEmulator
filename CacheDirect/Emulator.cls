@@ -146,6 +146,11 @@ Method PropertyRestore() As %Status [ PublicList = (P0, P1, P2, P3, P4, P5, P6, 
       }
 }
 
+ClassMethod GetNamespace() As %String
+{
+	quit $namespace
+}
+
 ClassMethod Version() As %String
 {
 	quit "V1.1"
