@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Timers;
 using InterSystems.Data.IRISClient;
@@ -35,6 +36,7 @@ namespace cdapp
         private long error;
         private long interval;
         private string inamespace;
+        private IRISList props;
 
         private void Exec3(object source, ElapsedEventArgs e)
         {
@@ -56,67 +58,120 @@ namespace cdapp
 
         public string P0
         {
-            set { this.p0 = value; }
+            set 
+            { 
+                this.p0 = value;
+                this.cd.Set("P0", value);
+            }
             get { return this.p0; }
         }
         public string P1
         {
-            set { this.p1 = value; }
+            set 
+            { 
+                this.p1 = value;
+                this.cd.Set("P1", value);
+            
+            }
             get { return this.p1; }
         }
         public string P2
         {
-            set { this.p2 = value; }
+            set 
+            { 
+                this.p2 = value;
+                this.cd.Set("P2", value);
+            }
             get { return this.p2; }
         }
         public string P3
         {
-            set { this.p3 = value; }
+            set 
+            { 
+                this.p3 = value;
+                this.cd.Set("P3",value);
+            }
             get { return this.p3; }
         }
         public string P4
         {
-            set { this.p4 = value; }
+            set 
+            { 
+                this.p4 = value;
+                this.cd.Set("P4", value);
+            }
             get { return this.p4; }
         }
         public string P5
         {
-            set { this.p5 = value; }
+            set 
+            { 
+                this.p5 = value;
+                this.cd.Set("P5", value);
+            }
             get { return this.p5; }
         }
         public string P6
         {
-            set { this.p6 = value; }
+            set 
+            { 
+                this.p6 = value;
+                this.cd.Set("P6", value);
+            }
             get { return this.p6; }
         }
         public string P7
         {
-            set { this.p7 = value; }
+            set 
+            { 
+                this.p7 = value;
+                this.cd.Set("P7", value);
+            }
             get { return this.p7; }
         }
         public string P8
         {
-            set { this.p8 = value; }
+            set 
+            { 
+                this.p8 = value;
+                this.cd.Set("P8", value);
+            }
             get { return this.p8; }
         }
         public string P9
         {
-            set { this.p9 = value; }
+            set 
+            { 
+                this.p9 = value;
+                this.cd.Set("P9", value);
+            }
             get { return this.p9; }
         }
         public string PLIST
         {
-            set { this.plist = value; }
+            set 
+            { 
+                this.plist = value;
+                this.cd.Set("PLIST", value);
+            }
             get { return this.plist; }
         }
         public string PDELIM
         {
-            set { this.pdelim = value; }
+            set 
+            { 
+                this.pdelim = value;
+                this.cd.Set("PDELIM", value);
+            }
             get { return this.pdelim; }
         }
         public string VALUE
         {
-            set { this.value = value; }
+            set 
+            { 
+                this.value = value;
+                this.cd.Set("VALUE", value);
+            }
             get
             {
                 if (this.execflag == 2)
@@ -169,8 +224,6 @@ namespace cdapp
             }
             get
             {
-                //this.Execute("=$namespace");
-                //return this.VALUE;
                 return iris.ClassMethodString("CacheDirect.Emulator", "GetNamespace");
             }
         }
@@ -226,179 +279,238 @@ namespace cdapp
         {
             long status;
 
-            cd.Set("P0", p0);
-            cd.Set("P1", p1);
-            cd.Set("P2", p2);
-            cd.Set("P3", p3);
-            cd.Set("P4", p4);
-            cd.Set("P5", p5);
-            cd.Set("P6", p6);
-            cd.Set("P7", p7);
-            cd.Set("P8", p8);
-            cd.Set("P9", p9);
-            cd.Set("PLIST", plist);
-            cd.Set("PDELIM", pdelim);
-
             status = (long)cd.Invoke("Execute", command);
 
-            if (cd.Get("P0") is string)
+            props = cd.GetIRISList("PropsData");
+
+            if (props.Get(1) != null) 
             {
-                p0 = (string)cd.Get("P0");
-            }
-            else
-            {
-                if (cd.Get("P0") != null)
+                if (props.Get(1).GetType().Name == "string")
                 {
-                    p0 = cd.Get("P0").ToString();
+                    p0 = (string)props.Get(1);
+                }
+                else if (props.Get(1).GetType().Name == "Byte[]")
+                {
+                    p0 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(1));
+                }
+                else
+                {
+                    p0 = props.Get(1).ToString();
                 }
             }
 
-            if (cd.Get("P1") is string)
+            if (props.Get(2) != null)
             {
-                p1 = (string)cd.Get("P1");
-            }
-            else
-            {
-                if (cd.Get("P1") != null)
+                if (props.Get(2).GetType().Name == "string")
                 {
-                    p1 = cd.Get("P1").ToString();
+                    p1 = (string)props.Get(2);
+                }
+                else if (props.Get(2).GetType().Name == "Byte[]")
+                {
+                    p1 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(2));
+                }
+                else
+                {
+                    p1 = props.Get(2).ToString();
                 }
             }
 
-            if (cd.Get("P2") is string)
+            if (props.Get(3) != null)
             {
-                p2 = (string)cd.Get("P2");
-            }
-            else
-            {
-                if (cd.Get("P2") != null)
+                if (props.Get(3).GetType().Name == "string")
                 {
-                    p2 = cd.Get("P2").ToString();
+                    p2 = (string)props.Get(3);
+                }
+                else if (props.Get(3).GetType().Name == "Byte[]")
+                {
+                    p2 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(3));
+                }
+                else
+                {
+                    p2 = props.Get(3).ToString();
                 }
             }
 
-            if (cd.Get("P3") is string)
+            if (props.Get(4) != null)
             {
-                p3 = (string)cd.Get("P3");
-            }
-            else
-            {
-                if (cd.Get("P3") != null)
+                if (props.Get(4).GetType().Name == "string")
                 {
-                    p3 = cd.Get("P3").ToString();
+                    p3 = (string)props.Get(4);
+                }
+                else if (props.Get(4).GetType().Name == "Byte[]")
+                {
+                    p3 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(4));
+                }
+                else
+                {
+                    p3 = props.Get(4).ToString();
                 }
             }
 
-            if (cd.Get("P4") is string)
+            if (props.Get(5) != null)
             {
-                p4 = (string)cd.Get("P4");
-            }
-            else
-            {
-                if (cd.Get("P4") != null)
+                if (props.Get(5).GetType().Name == "string")
                 {
-                    p4 = cd.Get("P4").ToString();
+                    p4 = (string)props.Get(5);
+                }
+                else if (props.Get(5).GetType().Name == "Byte[]")
+                {
+                    p4 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(5));
+                }
+                else
+                {
+                    p4 = props.Get(5).ToString();
                 }
             }
 
-            if (cd.Get("P5") is string)
+            if (props.Get(6) != null)
             {
-                p5 = (string)cd.Get("P5");
-            }
-            else
-            {
-                if (cd.Get("P5") != null)
+                if (props.Get(6).GetType().Name == "string")
                 {
-                    p5 = cd.Get("P5").ToString();
+                    p5 = (string)props.Get(6);
+                }
+                else if (props.Get(6).GetType().Name == "Byte[]")
+                {
+                    p5 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(6));
+                }
+                else
+                {
+                    p5 = props.Get(6).ToString();
                 }
             }
 
-            if (cd.Get("P6") is string)
+            if (props.Get(7) != null)
             {
-                p6 = (string)cd.Get("P6");
-            }
-            else
-            {
-                if (cd.Get("P6") != null)
+                if (props.Get(7).GetType().Name == "string")
                 {
-                    p6 = cd.Get("P6").ToString();
+                    p6 = (string)props.Get(7);
+                }
+                else if (props.Get(7).GetType().Name == "Byte[]")
+                {
+                    p6 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(7));
+                }
+                else
+                {
+                    p6 = props.Get(7).ToString();
                 }
             }
 
-            if (cd.Get("P7") is string)
+            if (props.Get(8) != null)
             {
-                p7 = (string)cd.Get("P7");
-            }
-            else
-            {
-                if (cd.Get("P7") != null)
+                if (props.Get(8).GetType().Name == "string")
                 {
-                    p7 = cd.Get("P7").ToString();
+                    p7 = (string)props.Get(8);
+                }
+                else if (props.Get(8).GetType().Name == "Byte[]")
+                {
+                    p7 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(8));
+                }
+                else
+                {
+                    p7 = props.Get(8).ToString();
                 }
             }
 
-            if (cd.Get("P8") is string)
+            if (props.Get(9) != null)
             {
-                p8 = (string)cd.Get("P8");
-            }
-            else
-            {
-                if (cd.Get("P8") != null)
+                if (props.Get(9).GetType().Name == "string")
                 {
-                    p8 = cd.Get("P8").ToString();
+                    p8 = (string)props.Get(9);
+                }
+                else if (props.Get(9).GetType().Name == "Byte[]")
+                {
+                    p8 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(9));
+                }
+                else
+                {
+                    p8 = props.Get(9).ToString();
                 }
             }
 
-            if (cd.Get("P9") is string)
+            if (props.Get(10) != null)
             {
-                p9 = (string)cd.Get("P9");
-            }
-            else
-            {
-                if (cd.Get("P9") != null)
+                if (props.Get(10).GetType().Name == "string")
                 {
-                    p9 = cd.Get("P9").ToString();
+                    p9 = (string)props.Get(10);
+                }
+                else if (props.Get(10).GetType().Name == "Byte[]")
+                {
+                    p9 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(10));
+                }
+                else
+                {
+                    p9 = props.Get(10).ToString();
                 }
             }
 
-            if (cd.Get("PLIST") is string)
+            if (props.Get(11) != null)
             {
-                plist = (string)cd.Get("PLIST");
-            }
-            else
-            {
-                if (cd.Get("PLIST") != null)
+                if (props.Get(11).GetType().Name == "string")
                 {
-                    plist = cd.Get("PLIST").ToString();
+                    plist = (string)props.Get(11);
+                }
+                else if (props.Get(11).GetType().Name == "Byte[]")
+                {
+                    plist = System.Text.Encoding.ASCII.GetString((byte[])props.Get(11));
+                }
+                else
+                {
+                    plist = props.Get(11).ToString();
                 }
             }
 
-            if (cd.Get("PDELIM") is string)
+            if (props.Get(12) != null)
             {
-                pdelim = (string)cd.Get("PDELIM");
-            }
-            else
-            {
-                if (cd.Get("PDELIM") != null)
+                if (props.Get(12).GetType().Name == "string")
                 {
-                    pdelim = cd.Get("PDELIM").ToString();
+                    pdelim = (string)props.Get(12);
+                }
+                else if (props.Get(12).GetType().Name == "Byte[]")
+                {
+                    pdelim = System.Text.Encoding.ASCII.GetString((byte[])props.Get(12));
+                }
+                else
+                {
+                    pdelim = props.Get(12).ToString();
                 }
             }
 
-            if (cd.Get("VALUE") is string)
+            if (props.Get(13) != null)
             {
-                value = (string)cd.Get("VALUE");
-            }
-            else
-            {
-                if (cd.Get("VALUE") != null)
+                if (props.Get(13).GetType().Name == "string")
                 {
-                    value = cd.Get("VALUE").ToString();
+                    value = (string)props.Get(13);
+                }
+                else if (props.Get(13).GetType().Name == "Byte[]")
+                {
+                    value = System.Text.Encoding.ASCII.GetString((byte[])props.Get(13));
+                }
+                else
+                {
+                    value = props.Get(13).ToString();
                 }
             }
 
-            errorname = (string)cd.Get("ErrorName");
-            error = (long)cd.Get("Error");
+            if (props.Get(14) != null)
+            {
+                error = (Int32)props.Get(14);
+            }
+
+            if (props.Get(15) != null)
+            {
+                if (props.Get(15).GetType().Name == "string")
+                {
+                    errorname = (string)props.Get(15);
+                }
+                else if (props.Get(15).GetType().Name == "Byte[]")
+                {
+                    errorname = System.Text.Encoding.ASCII.GetString((byte[])props.Get(15));
+                }
+                else
+                {
+                    errorname = props.Get(15).ToString();
+                }
+            }
 
             if (error == 1)
             {
@@ -492,6 +604,10 @@ namespace cdapp
             }
 
             return true;
+        }
+        public string Version
+        {
+            get { return "V2.0"; }
         }
     }
 }
