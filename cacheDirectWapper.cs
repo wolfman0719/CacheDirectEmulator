@@ -493,7 +493,7 @@ namespace cdapp
 
             if (props.Get(14) != null)
             {
-                error = (Int32)props.Get(14);
+                error = (int)props.Get(14);
             }
 
             if (props.Get(15) != null)
