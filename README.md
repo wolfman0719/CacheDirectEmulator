@@ -29,7 +29,7 @@ Version 16.6.0
 
 Choose Add Reference from the project settings in Visual Studio and add the following files.
 
-<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319
+<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.5
 
 InterSystems.Data.IRISClient.dll
 
@@ -67,61 +67,42 @@ to run the sample
 
 ### Unsupported Property
 
-ConnectionState
-
-ConTag
-
-ElapsedTime
-
-ErrorTrap
-
-KeepAliveInterval
-
-KeepAliveTimeOut
-
-LogMask
-
-MServer
-
-MsgText
-
-NameSpace
-
-PromptInterval
-
-Server
-
-Tag
-
-TimeOut
+- ConnectionState
+- ConTag
+- ElapsedTime
+- ErrorTrap
+- KeepAliveInterval
+- KeepAliveTimeOut
+- LogMask
+- MServer
+- MsgText
+- NameSpace
+- PromptInterval
+- Server
+- Tag
+- TimeOut
 
 ### Unsupported Method
 
-DeleteConnection
-
-SetMServer
-
-SetServer
-
-Shutdown Event
+- DeleteConnection
+- SetMServer
+- SetServer
+- Shutdown Event
 
 ### Unsupported Additinal features
 
-ErrorTrapping
-
-The Keep Alive Feature
-
-Server Read Loop and Quick Check
-
-Read and Write Hooks
-
-Other Server Side Hooks
-
-User Cancel Option
+- ErrorTrapping
+- The Keep Alive Feature
+- Server Read Loop and Quick Check
+- Read and Write Hooks
+- Other Server Side Hooks
+- User Cancel Option
 
 ### Visual Basic Specific functions
 
 It does not support any features specific to Visual Basic in the Cache Direct features as follows:.
 
-Callback function, MessageBox, DoEvents, etc.
+- Callback function
+- MessageBox
+- DoEvents, etc.
 
