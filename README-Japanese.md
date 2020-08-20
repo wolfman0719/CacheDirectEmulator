@@ -29,7 +29,7 @@ Version 16.6.0
 
 Visual Studioのプロジェクト設定から参照の追加を選び、以下のファイルを追加してください。
 
-c:\InterSystems\IRIS\dev\dotnet\bin\v4.0.30319
+c:\InterSystems\IRIS\dev\dotnet\bin\v4.5
 
 InterSystems.Data.IRISClient.dll
 
@@ -59,7 +59,7 @@ Module1.vbは、このエミュレータを使用するVB.Netサンプルコー�
 
 1. C# class libraryプロジェクトを作成します。
 
-2. cacheDirectWapper.csをそのプロジェクトに追加します。の
+2. cacheDirectWapper.csをそのプロジェクトに追加します。
 
 3. InterSystems.Data.Gateway64.exeとInterSystems.Data.IRISClient.dllの参照を追加します。
 
@@ -75,61 +75,44 @@ Module1.vbは、このエミュレータを使用するVB.Netサンプルコー�
 
 ### サポートしていないプロパティ
 
-ConnectionState
-
-ConTag
-
-ElapsedTime
-
-ErrorTrap
-
-KeepAliveInterval
-
-KeepAliveTimeOut
-
-LogMask
-
-MServer
-
-MsgText
-
-NameSpace
-
-PromptInterval
-
-Server
-
-Tag
-
-TimeOut
+- ConnectionState
+- ConTag
+- ElapsedTime
+- ErrorTrap
+- KeepAliveInterval
+- KeepAliveTimeOut
+- LogMask
+- MServer
+- MsgText
+- NameSpace
+- PromptInterval
+- Server
+- Tag
+- TimeOut
 
 ### サポートしていないメソッド
 
-DeleteConnection
+- DeleteConnection
+- SetMServer
+- SetServer
 
-SetMServer
+### サポートしていないイベント
 
-SetServer
-
-Shutdown Eventsはサポートしていません
+- Shutdown Events
 
 ### サポートされない追加機能
 
-ErrorTrapping
-
-The Keep Alive Feature
-
-Server Read Loop and Quick Check
-
-Read and Write Hooks
-
-Other Server Side Hooks
-
-User Cancel Option
+- ErrorTrapping
+- The Keep Alive Feature
+- Server Read Loop and Quick Check
+- Read and Write Hooks
+- Other Server Side Hooks
+- User Cancel Option
 
 ### Visual Basic依存機能
 
 Cache Directの機能の中で、Visual Basicの固有の機能は、サポートしていません。
 
-コールバック機能、MessageBox, DoEventsなど
-
+- コールバック機能
+- MessageBox
+- DoEventsなど
