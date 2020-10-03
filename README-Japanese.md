@@ -116,3 +116,12 @@ Cache Directの機能の中で、Visual Basicの固有の機能は、サポー�
 - コールバック機能
 - MessageBox
 - DoEventsなど
+
+## コンストラクター
+
+2個のコンストラクターが用意されています。
+
+cacheDirectWapper(string constr)
+
+cacheDirectWapper(IRISConnection irisconn)
+
