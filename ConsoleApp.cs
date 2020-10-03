@@ -1,19 +1,21 @@
 using System;
 using System.Diagnostics;
+using InterSystems.Data.IRISClient;
+using InterSystems.Data.IRISClient.ADO;
 
 // Add the following using statement
 
 namespace cdapp
 {
-	/// <summary>
-	/// Summary description for Class1.
-	/// </summary>
-	class ConsoleApp
-	{
-		/// <summary>
-		/// The main entry point for the application.
-		/// </summary>
-		[STAThread]
+    /// <summary>
+    /// Summary description for Class1.
+    /// </summary>
+    class ConsoleApp
+    {
+        /// <summary>
+        /// The main entry point for the application.
+        /// </summary>
+        [STAThread]
         void OnError(object sender, EventArgs e)
         {
             Debug.Print("OnError Event Occurs!!!");
@@ -32,7 +34,14 @@ namespace cdapp
             try
             {
                 // Create a cacheDirectWapper instance
+             #if AUTOCONNECT 
                 cacheDirectWapper cdw = new cacheDirectWapper("Server = localhost; Log File=cprovider.log;Port=51773; Namespace=USER; Password = SYS; User ID = _system;");
+             #else
+                IRISConnection irisconn = new IRISConnection();
+                irisconn.ConnectionString = "Server = localhost; Log File=cprovider.log;Port=51773; Namespace=USER; Password = SYS; User ID = _system;";
+                irisconn.Open();
+                cacheDirectWapper cdw = new cacheDirectWapper(irisconn);
+             #endif
 
                 cdw.ErrorEvent += OnError;
                 cdw.ExecuteEvent += Executed;

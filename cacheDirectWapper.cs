@@ -261,6 +261,20 @@ namespace cdapp
             }
         }
 
+        public cacheDirectWapper(IRISConnection irisconn)
+        {
+            try
+            {
+
+                conn = irisconn;
+                iris = IRIS.CreateIRIS(conn);
+                cd = (IRISObject)iris.ClassMethodObject("CacheDirect.Emulator", "%New");
+
+            }
+            finally
+            {
+            }
+        }
         public Boolean end()
         {
 
@@ -607,7 +621,7 @@ namespace cdapp
         }
         public string Version
         {
-            get { return "V2.0"; }
+            get { return "V2.1"; }
         }
     }
 }
