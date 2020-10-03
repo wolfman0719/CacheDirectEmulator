@@ -106,3 +106,11 @@ It does not support any features specific to Visual Basic in the Cache Direct fe
 - MessageBox
 - DoEvents, etc.
 
+## Constructors
+
+2 Constructors are defined
+
+cacheDirectWapper(string constr)
+
+cacheDirectWapper(IRISConnection irisconn)
+
