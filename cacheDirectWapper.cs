@@ -207,7 +207,7 @@ namespace cdapp
                     timer.Enabled = true;
                     timer.Elapsed += new ElapsedEventHandler(Exec3);
 
-                    // タイマーを開始する
+                    // ﾆ耽ﾆ辰ﾆ筑ﾂー窶堙ｰﾅJﾅｽn窶堋ｷ窶堙ｩ
                     timer.Start();
 
                 }
@@ -287,6 +287,18 @@ namespace cdapp
             {
             }
             return true;
+        }
+
+        public void Dispose()
+        {
+
+            try
+            {
+                cd.Dispose();
+            }
+            finally
+            {
+            }
         }
 
         public long Execute(string command)
