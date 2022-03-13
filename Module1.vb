@@ -5,14 +5,14 @@ Imports cdapp
 Module Module1
     Sub Main()
 	    #If AUTOCONNECT Then
-        Dim cdw As cacheDirectWapper = New cacheDirectWapper("Server = localhost; Port=51773; Namespace=USER; Password = SYS; User ID = _system;") With {
+        Dim cdw As cacheDirectWapper = New cacheDirectWapper("Server = localhost; Port=1972; Namespace=USER; Password = SYS; User ID = _system;") With {
         .P0 = "ABC;DEF;GHI",
         .P1 = ";",
         .PDELIM = ";"
         }
 	    #Else
 		Dim irisconn As IRISConnection = New IRISConnection()
-		irisconn.ConnectionString = "Server = localhost; Port=51773; Namespace=USER; Password = SYS; User ID = _system;"
+		irisconn.ConnectionString = "Server = localhost; Port=1972; Namespace=USER; Password = SYS; User ID = _system;"
 		irisconn.Open()
         Dim cdw As cacheDirectWapper = New cacheDirectWapper(irisconn) With {
         .P0 = "ABC;DEF;GHI",
