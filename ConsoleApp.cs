@@ -35,10 +35,10 @@ namespace cdapp
             {
                 // Create a cacheDirectWapper instance
              #if AUTOCONNECT 
-                cacheDirectWapper cdw = new cacheDirectWapper("Server = localhost; Log File=cprovider.log;Port=51773; Namespace=USER; Password = SYS; User ID = _system;");
+                cacheDirectWapper cdw = new cacheDirectWapper("Server = localhost; Log File=cprovider.log;Port=1972; Namespace=USER; Password = SYS; User ID = _system;");
              #else
                 IRISConnection irisconn = new IRISConnection();
-                irisconn.ConnectionString = "Server = localhost; Log File=cprovider.log;Port=51773; Namespace=USER; Password = SYS; User ID = _system;";
+                irisconn.ConnectionString = "Server = localhost; Log File=cprovider.log;Port=1972; Namespace=USER; Password = SYS; User ID = _system;";
                 irisconn.Open();
                 cacheDirectWapper cdw = new cacheDirectWapper(irisconn);
              #endif
@@ -57,7 +57,7 @@ namespace cdapp
                 Debug.Print("ErrorName = " + cdw.ErrorName);
                 Debug.Print("\n");
 
-                cdw.P0 = "Ç†Ç¢Ç§Ç¶Ç®;Ç©Ç´Ç≠ÇØÇ±;Ç≥ÇµÇ∑ÇπÇª";
+                cdw.P0 = "„ÅÇ„ÅÑ„ÅÜ„Åà„Åä;„Åã„Åç„Åè„Åë„Åì;„Åï„Åó„Åô„Åõ„Åù";
                 cdw.P1 = ";";
                 cdw.PDELIM = ";";
 
@@ -131,7 +131,7 @@ namespace cdapp
 
                 /*
                 // Create a cacheDirectWapper instance
-                cacheDirectWapper cdw = new cacheDirectWapper("Server = localhost; Log File=cprovider.log;Port=51773; Namespace=USER; Password = SYS; User ID = _system;");
+                cacheDirectWapper cdw = new cacheDirectWapper("Server = localhost; Log File=cprovider.log;Port=1972; Namespace=USER; Password = SYS; User ID = _system;");
 
                 //cdw.ErrorEvent += OnError;
                 cdw.P0 = "ABC;DEF;GHI";
@@ -147,7 +147,7 @@ namespace cdapp
                 Debug.Print("ErrorName = " + cdw.ErrorName);
                 Debug.Print("\n");
 
-                cdw.P0 = "Ç†Ç¢Ç§Ç¶Ç®;Ç©Ç´Ç≠ÇØÇ±;Ç≥ÇµÇ∑ÇπÇª";
+                cdw.P0 = "„ÅÇ„ÅÑ„ÅÜ„Åà„Åä;„Åã„Åç„Åè„Åë„Åì;„Åï„Åó„Åô„Åõ„Åù";
                 cdw.P1 = ";";
                 cdw.PDELIM = ";";
 
