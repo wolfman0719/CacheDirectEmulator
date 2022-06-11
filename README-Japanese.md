@@ -33,8 +33,6 @@ c:\InterSystems\IRIS\dev\dotnet\bin\v4.5
 
 InterSystems.Data.IRISClient.dll
 
-InterSystems.Data.Gateway64.exe
-
 ### ビルド
 
 Visual StudioのビルドメニューからC_SharpConsoleApplicationのビルドをクリック
