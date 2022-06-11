@@ -33,8 +33,6 @@ Choose Add Reference from the project settings in Visual Studio and add the foll
 
 InterSystems.Data.IRISClient.dll
 
-InterSystems.Data.Gateway64.exe
-
 ### Build
 
 Click Build C_SharpConsoleApplication from the Visual Studio build menu.
