@@ -55,7 +55,7 @@ to run the sample
 
 1. create a c# class library project
 2. add cacheDirectWapper.cs to the project
-3. add references to InterSystems.Data.Gateway64.exe and InterSystems.Data.IRISClient.dll
+3. add references to InterSystems.Data.IRISClient.dll
 4. build the project
 4. create a VB.Net console application project
 5. add Module1.vb to the project
