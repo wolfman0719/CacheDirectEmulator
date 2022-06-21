@@ -59,7 +59,7 @@ Module1.vbは、このエミュレータを使用するVB.Netサンプルコー�
 
 2. cacheDirectWapper.csをそのプロジェクトに追加します。
 
-3. InterSystems.Data.Gateway64.exeとInterSystems.Data.IRISClient.dllの参照を追加します。
+3. InterSystems.Data.IRISClient.dllの参照を追加します。
 
 4. プロジェクトをビルドします。
 
