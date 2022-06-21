@@ -59,7 +59,8 @@ to run the sample
 4. build the project
 4. create a VB.Net console application project
 5. add Module1.vb to the project
-6. add a refernce to the class library dll 
+6. add references to InterSystems.Data.IRISClient.dll
+6. add refernce to the class library dll 
 
 ## Unsupported features
 
