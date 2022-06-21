@@ -1,5 +1,5 @@
-﻿Imports InterSystems.Data.IRISClient;
-Imports InterSystems.Data.IRISClient.ADO;
+Imports InterSystems.Data.IRISClient
+Imports InterSystems.Data.IRISClient.ADO
 Imports cdapp
 
 Module Module1
