@@ -12,31 +12,31 @@ namespace cdapp
         public IRISConnection conn = new IRISConnection();
         public IRIS iris;
         public IRISObject cd;
-        public event EventHandler? ErrorEvent;
-        public event EventHandler? ExecuteEvent;
+        public event EventHandler ErrorEvent = delegate { };
+        public event EventHandler ExecuteEvent = delegate { };
 
         private System.Timers.Timer timer = new System.Timers.Timer();
 
-        private string? p0;
-        private string? p1;
-        private string? p2;
-        private string? p3;
-        private string? p4;
-        private string? p5;
-        private string? p6;
-        private string? p7;
-        private string? p8;
-        private string? p9;
-        private string? plist;
-        private string? pdelim;
-        private string? value;
-        private string? code;
-        private long execflag;
-        private string? errorname;
-        private long error;
+        private string p0 = "";
+        private string p1 = "";
+        private string p2 = "";
+        private string p3 = "";
+        private string p4 = "";
+        private string p5 = "";
+        private string p6 = "";
+        private string p7 = "";
+        private string p8 = "";
+        private string p9 = "";
+        private string plist = "";
+        private string pdelim = "\r\n";
+        private string value = "";
+        private string code = "";
+        private long execflag = 0;
+        private string errorname = "";
+        private long error = 0;
         private long interval;
-        private string? inamespace;
-        private IRISList? props;
+        private string inamespace = "";
+        private IRISList props = new IRISList();
 
         private void Exec3(object? source, ElapsedEventArgs e)
         {
@@ -56,121 +56,121 @@ namespace cdapp
             ExecuteEvent?.Invoke(this, EventArgs.Empty);
         }
 
-        public string? P0
+        public string P0
         {
             set 
             { 
                 this.p0 = value;
-                this.cd.Set("P0", value);
+                this.cd.Set(nameof(P0), value);
             }
             get { return this.p0; }
         }
-        public string? P1
+        public string P1
         {
             set 
             { 
                 this.p1 = value;
-                this.cd.Set("P1", value);
+                this.cd.Set(nameof(P1), value);
             
             }
             get { return this.p1; }
         }
-        public string? P2
+        public string P2
         {
             set 
             { 
                 this.p2 = value;
-                this.cd.Set("P2", value);
+                this.cd.Set(nameof(P2), value);
             }
             get { return this.p2; }
         }
-        public string? P3
+        public string P3
         {
             set 
             { 
                 this.p3 = value;
-                this.cd.Set("P3",value);
+                this.cd.Set(nameof(P3), value);
             }
             get { return this.p3; }
         }
-        public string? P4
+        public string P4
         {
             set 
             { 
                 this.p4 = value;
-                this.cd.Set("P4", value);
+                this.cd.Set(nameof(P4), value);
             }
             get { return this.p4; }
         }
-        public string? P5
+        public string P5
         {
             set 
             { 
                 this.p5 = value;
-                this.cd.Set("P5", value);
+                this.cd.Set(nameof(P5), value);
             }
             get { return this.p5; }
         }
-        public string? P6
+        public string P6
         {
             set 
             { 
                 this.p6 = value;
-                this.cd.Set("P6", value);
+                this.cd.Set(nameof(P6), value);
             }
             get { return this.p6; }
         }
-        public string? P7
+        public string P7
         {
             set 
             { 
                 this.p7 = value;
-                this.cd.Set("P7", value);
+                this.cd.Set(nameof(P7), value);
             }
             get { return this.p7; }
         }
-        public string? P8
+        public string P8
         {
             set 
             { 
                 this.p8 = value;
-                this.cd.Set("P8", value);
+                this.cd.Set(nameof(P8), value);
             }
             get { return this.p8; }
         }
-        public string? P9
+        public string P9
         {
             set 
             { 
                 this.p9 = value;
-                this.cd.Set("P9", value);
+                this.cd.Set(nameof(P9), value);
             }
             get { return this.p9; }
         }
-        public string? PLIST
+        public string PLIST
         {
             set 
             { 
                 this.plist = value;
-                this.cd.Set("PLIST", value);
+                this.cd.Set(nameof(PLIST), value);
             }
             get { return this.plist; }
         }
-        public string? PDELIM
+        public string PDELIM
         {
             set 
             { 
                 this.pdelim = value;
-                this.cd.Set("PDELIM", value);
+                this.cd.Set(nameof(PDELIM), value);
             }
             get { return this.pdelim; }
         }
-        public string? VALUE
+        public string VALUE
         {
             set 
             { 
                 this.value = value;
-                this.cd.Set("VALUE", value);
+                this.cd.Set(nameof(VALUE), value);
             }
             get
             {
@@ -182,7 +182,7 @@ namespace cdapp
                 return this.value;
             }
         }
-        public string? Code
+        public string Code
         {
             set { this.code = value; }
             get { return this.code; }
@@ -207,7 +207,7 @@ namespace cdapp
                     timer.Enabled = true;
                     timer.Elapsed += new ElapsedEventHandler(Exec3);
 
-                    // ƒ^ƒCƒ}[‚ðŠJŽn‚·‚é
+                   
                     timer.Start();
 
                 }
@@ -215,7 +215,7 @@ namespace cdapp
             get { return this.execflag; }
         }
 
-        public string? NameSpace
+        public string NameSpace
         {
             set
             {
@@ -235,11 +235,11 @@ namespace cdapp
             }
             get { return this.interval; }
         }
-        public string? ErrorName
+        public string ErrorName
         {
             get { return this.errorname; }
         }
-        public string? Error
+        public string Error
         {
             get { return this.error.ToString(); }
         }
@@ -301,7 +301,7 @@ namespace cdapp
             }
         }
 
-        public long Execute(string? command)
+        public long Execute(string command)
         {
             long status;
 
@@ -552,10 +552,10 @@ namespace cdapp
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get("PLIST") is string)
+            if (cd.Get(nameof(PLIST)) is string)
             {
-                string plist = (string)cd.Get("PLIST");
-                string? pdelim = cd.Get("PDELIM").ToString();
+                string? plist = (string)cd.Get(nameof(PLIST));
+                string? pdelim = cd.Get(nameof(PDELIM)).ToString();
                 if (pdelim is null)
                 {
                     pdelim = "\r\n";
@@ -565,36 +565,40 @@ namespace cdapp
 
             }
             else {
-                if (cd.Get("PLIST") != null)
+                if (cd.Get(nameof(PLIST)) != null)
                 {
-                   string? plist = cd.Get("PLIST").ToString();
-                   string? pdelim = cd.Get("PDELIM").ToString();
-                   if (pdelim is null)
+                    string? plist = cd.Get(nameof(PLIST)).ToString();
+                    string? pdelim = cd.Get(nameof(PDELIM)).ToString();
+                    if (pdelim is null)
                    {
                       pdelim = "\r\n";
                    }
-
-                    if (plist is null)
+                   if (plist != null && plist.Length > 0)
                     {
-                        plist = "";
+                        PLISTArray = plist.Split(pdelim.ToCharArray());
                     }
 
-                    PLISTArray = plist.Split(pdelim.ToCharArray());
                 }
 
             }
 
+            if (PLISTArray[index - 1] != null)
+            {
+                return PLISTArray[index - 1];
+            }
+            else {
+                return "";
+            }
 
-            return PLISTArray[index - 1];
         }
         public long getPLISTLength()
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get("PLIST") is string)
+            if (cd.Get(nameof(PLIST)) is string)
             {
-                string plist = (string)cd.Get("PLIST");
-                string? pdelim = cd.Get("PDELIM").ToString();
+                string plist = (string)cd.Get(nameof(PLIST));
+                string? pdelim = cd.Get(nameof(PDELIM)).ToString();
                 if (pdelim is null)
                 {
                     pdelim = "\r\n";
@@ -605,22 +609,20 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("PLIST") != null)
+                if (cd.Get(nameof(PLIST)) != null)
                 {
-                    string? plist = cd.Get("PLIST").ToString();
-                    string? pdelim = cd.Get("PDELIM").ToString();
+                    string? plist = cd.Get(nameof(PLIST)).ToString();
+                    string? pdelim = cd.Get(nameof(PDELIM)).ToString();
 
                     if (pdelim is null)
                     {
                         pdelim = "\r\n";
                     }
 
-                    if (plist is null)
+                    if (plist != null && plist.Length > 0)
                     {
-                        plist = "";
+                        PLISTArray = plist.Split(pdelim.ToCharArray());
                     }
-
-                    PLISTArray = plist.Split(pdelim.ToCharArray());
                 }
 
             }
@@ -632,10 +634,10 @@ namespace cdapp
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get("PLIST") is string)
+            if (cd.Get(nameof(PLIST)) is string)
             {
-                string plist = (string)cd.Get("PLIST");
-                string? pdelim = (string)cd.Get("PDELIM");
+                string plist = (string)cd.Get(nameof(PLIST));
+                string pdelim = (string)cd.Get(nameof(PDELIM));
 
                 if (pdelim is null)
                 {
@@ -646,41 +648,39 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get("PLIST") != null)
+                if (cd.Get(nameof(PLIST)) != null)
                 {
 
-                    string? plist = cd.Get("PLIST").ToString();
-                    string? pdelim = (string)cd.Get("PDELIM");
+                    string? plist = cd.Get(nameof(PLIST)).ToString();
+                    string? pdelim = (string)cd.Get(nameof(PDELIM));
 
                     if (pdelim is null)
                     {
                         pdelim = "\r\n";
                     }
 
-                    if (plist is null)
+                    if (plist != null && plist.Length > 0)
                     {
-                        plist = "";
+                        PLISTArray = plist.Split(pdelim.ToCharArray());
                     }
-
-                    PLISTArray = plist.Split((pdelim.ToCharArray()));
                 }
             }
 
             if (index <= PLISTArray.Length)
             {
                 PLISTArray[index - 1] = replace;
-                cd.Set("PLIST", string.Join(cd.Get("PDELIM").ToString(), PLISTArray));
+                cd.Set(nameof(PLIST), string.Join(cd.Get(nameof(PDELIM)).ToString(), PLISTArray));
             }
 
-            if (cd.Get("PLIST") is string)
+            if (cd.Get(nameof(PLIST)) is string)
             {
-                plist = (string)cd.Get("PLIST");
+                plist = (string)cd.Get(nameof(PLIST));
             }
             else
             {
-                if (cd.Get("PLIST") != null)
+                if (cd.Get(nameof(PLIST)) != null)
                 {
-                    plist = cd.Get("PLIST").ToString();
+                    plist = cd.Get(nameof(PLIST)).ToString();
                 }
             }
 
