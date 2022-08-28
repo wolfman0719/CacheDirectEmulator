@@ -12,31 +12,31 @@ namespace cdapp
         public IRISConnection conn = new IRISConnection();
         public IRIS iris;
         public IRISObject cd;
-        public event EventHandler ErrorEvent;
-        public event EventHandler ExecuteEvent;
+        public event EventHandler ErrorEvent = delegate { };
+        public event EventHandler ExecuteEvent = delegate { };
 
-        private System.Timers.Timer timer = new System.Timers.Timer();
+        private readonly System.Timers.Timer timer = new System.Timers.Timer();
 
-        private string p0;
-        private string p1;
-        private string p2;
-        private string p3;
-        private string p4;
-        private string p5;
-        private string p6;
-        private string p7;
-        private string p8;
-        private string p9;
-        private string plist;
-        private string pdelim;
-        private string value;
-        private string code;
-        private long execflag;
-        private string errorname;
-        private long error;
+        private string p0 = "";
+        private string p1 = "";
+        private string p2 = "";
+        private string p3 = "";
+        private string p4 = "";
+        private string p5 = "";
+        private string p6 = "";
+        private string p7 = "";
+        private string p8 = "";
+        private string p9 = "";
+        private string plist = "";
+        private string pdelim = "\r\n";
+        private string value = "";
+        private string code = "";
+        private long execflag = 0;
+        private string errorname = "";
+        private long error = 0;
         private long interval;
-        private string inamespace;
-        private IRISList props;
+        private string inamespace = "";
+        private IRISList props = new IRISList();
 
         private void Exec3(object source, ElapsedEventArgs e)
         {
@@ -61,7 +61,6 @@ namespace cdapp
             set 
             { 
                 this.p0 = value;
-                this.cd.Set("P0", value);
             }
             get { return this.p0; }
         }
@@ -70,7 +69,6 @@ namespace cdapp
             set 
             { 
                 this.p1 = value;
-                this.cd.Set("P1", value);
             
             }
             get { return this.p1; }
@@ -80,7 +78,6 @@ namespace cdapp
             set 
             { 
                 this.p2 = value;
-                this.cd.Set("P2", value);
             }
             get { return this.p2; }
         }
@@ -89,7 +86,6 @@ namespace cdapp
             set 
             { 
                 this.p3 = value;
-                this.cd.Set("P3",value);
             }
             get { return this.p3; }
         }
@@ -98,7 +94,6 @@ namespace cdapp
             set 
             { 
                 this.p4 = value;
-                this.cd.Set("P4", value);
             }
             get { return this.p4; }
         }
@@ -107,7 +102,6 @@ namespace cdapp
             set 
             { 
                 this.p5 = value;
-                this.cd.Set("P5", value);
             }
             get { return this.p5; }
         }
@@ -116,7 +110,6 @@ namespace cdapp
             set 
             { 
                 this.p6 = value;
-                this.cd.Set("P6", value);
             }
             get { return this.p6; }
         }
@@ -125,7 +118,6 @@ namespace cdapp
             set 
             { 
                 this.p7 = value;
-                this.cd.Set("P7", value);
             }
             get { return this.p7; }
         }
@@ -134,7 +126,6 @@ namespace cdapp
             set 
             { 
                 this.p8 = value;
-                this.cd.Set("P8", value);
             }
             get { return this.p8; }
         }
@@ -143,7 +134,6 @@ namespace cdapp
             set 
             { 
                 this.p9 = value;
-                this.cd.Set("P9", value);
             }
             get { return this.p9; }
         }
@@ -152,7 +142,6 @@ namespace cdapp
             set 
             { 
                 this.plist = value;
-                this.cd.Set("PLIST", value);
             }
             get { return this.plist; }
         }
@@ -161,7 +150,6 @@ namespace cdapp
             set 
             { 
                 this.pdelim = value;
-                this.cd.Set("PDELIM", value);
             }
             get { return this.pdelim; }
         }
@@ -170,7 +158,6 @@ namespace cdapp
             set 
             { 
                 this.value = value;
-                this.cd.Set("VALUE", value);
             }
             get
             {
@@ -207,7 +194,7 @@ namespace cdapp
                     timer.Enabled = true;
                     timer.Elapsed += new ElapsedEventHandler(Exec3);
 
-                    // ƒ^ƒCƒ}[‚ðŠJŽn‚·‚é
+                   
                     timer.Start();
 
                 }
@@ -220,11 +207,10 @@ namespace cdapp
             set
             {
                 this.inamespace = value;
-                this.Execute("set $namespace=" + "" + value + "");
             }
             get
             {
-                return iris.ClassMethodString("CacheDirect.Emulator", "GetNamespace");
+                return this.inamespace;
             }
         }
         public long Interval
@@ -301,241 +287,81 @@ namespace cdapp
             }
         }
 
+        private static string PropGet(IRISList props,int index)
+        {
+            string result;
+
+            if (props.Get(index) != null)
+            {
+                if (props.Get(index).GetType().Name == "string")
+                {
+                    result = (string)props.Get(index);
+                }
+                else if (props.Get(index).GetType().Name == "Byte[]")
+                {
+                    result = System.Text.Encoding.ASCII.GetString((byte[])props.Get(index));
+                }
+                else
+                {
+                    result = props.Get(index).ToString();
+                }
+          
+            }
+            else { result = null; }
+
+            if (result != null)
+            {
+                return result;
+            }
+            else {
+                return ""; 
+            }
+
+        }
+
         public long Execute(string command)
         {
             long status;
 
-            status = (long)cd.Invoke("Execute", command);
+            IRISList sendmessage = new IRISList();
+
+            sendmessage.Add(command);
+            sendmessage.Add(p0);
+            sendmessage.Add(p1);
+            sendmessage.Add(p2);
+            sendmessage.Add(p3);
+            sendmessage.Add(p4);
+            sendmessage.Add(p5);
+            sendmessage.Add(p6);
+            sendmessage.Add(p7);
+            sendmessage.Add(p8);
+            sendmessage.Add(p9);
+            sendmessage.Add(plist);
+            sendmessage.Add(pdelim);
+            sendmessage.Add(inamespace);
+
+            status = (long)cd.Invoke("Execute", sendmessage);
 
             props = cd.GetIRISList("PropsData");
 
-            if (props.Get(1) != null) 
-            {
-                if (props.Get(1).GetType().Name == "string")
-                {
-                    p0 = (string)props.Get(1);
-                }
-                else if (props.Get(1).GetType().Name == "Byte[]")
-                {
-                    p0 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(1));
-                }
-                else
-                {
-                    p0 = props.Get(1).ToString();
-                }
-            }
-
-            if (props.Get(2) != null)
-            {
-                if (props.Get(2).GetType().Name == "string")
-                {
-                    p1 = (string)props.Get(2);
-                }
-                else if (props.Get(2).GetType().Name == "Byte[]")
-                {
-                    p1 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(2));
-                }
-                else
-                {
-                    p1 = props.Get(2).ToString();
-                }
-            }
-
-            if (props.Get(3) != null)
-            {
-                if (props.Get(3).GetType().Name == "string")
-                {
-                    p2 = (string)props.Get(3);
-                }
-                else if (props.Get(3).GetType().Name == "Byte[]")
-                {
-                    p2 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(3));
-                }
-                else
-                {
-                    p2 = props.Get(3).ToString();
-                }
-            }
-
-            if (props.Get(4) != null)
-            {
-                if (props.Get(4).GetType().Name == "string")
-                {
-                    p3 = (string)props.Get(4);
-                }
-                else if (props.Get(4).GetType().Name == "Byte[]")
-                {
-                    p3 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(4));
-                }
-                else
-                {
-                    p3 = props.Get(4).ToString();
-                }
-            }
-
-            if (props.Get(5) != null)
-            {
-                if (props.Get(5).GetType().Name == "string")
-                {
-                    p4 = (string)props.Get(5);
-                }
-                else if (props.Get(5).GetType().Name == "Byte[]")
-                {
-                    p4 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(5));
-                }
-                else
-                {
-                    p4 = props.Get(5).ToString();
-                }
-            }
-
-            if (props.Get(6) != null)
-            {
-                if (props.Get(6).GetType().Name == "string")
-                {
-                    p5 = (string)props.Get(6);
-                }
-                else if (props.Get(6).GetType().Name == "Byte[]")
-                {
-                    p5 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(6));
-                }
-                else
-                {
-                    p5 = props.Get(6).ToString();
-                }
-            }
-
-            if (props.Get(7) != null)
-            {
-                if (props.Get(7).GetType().Name == "string")
-                {
-                    p6 = (string)props.Get(7);
-                }
-                else if (props.Get(7).GetType().Name == "Byte[]")
-                {
-                    p6 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(7));
-                }
-                else
-                {
-                    p6 = props.Get(7).ToString();
-                }
-            }
-
-            if (props.Get(8) != null)
-            {
-                if (props.Get(8).GetType().Name == "string")
-                {
-                    p7 = (string)props.Get(8);
-                }
-                else if (props.Get(8).GetType().Name == "Byte[]")
-                {
-                    p7 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(8));
-                }
-                else
-                {
-                    p7 = props.Get(8).ToString();
-                }
-            }
-
-            if (props.Get(9) != null)
-            {
-                if (props.Get(9).GetType().Name == "string")
-                {
-                    p8 = (string)props.Get(9);
-                }
-                else if (props.Get(9).GetType().Name == "Byte[]")
-                {
-                    p8 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(9));
-                }
-                else
-                {
-                    p8 = props.Get(9).ToString();
-                }
-            }
-
-            if (props.Get(10) != null)
-            {
-                if (props.Get(10).GetType().Name == "string")
-                {
-                    p9 = (string)props.Get(10);
-                }
-                else if (props.Get(10).GetType().Name == "Byte[]")
-                {
-                    p9 = System.Text.Encoding.ASCII.GetString((byte[])props.Get(10));
-                }
-                else
-                {
-                    p9 = props.Get(10).ToString();
-                }
-            }
-
-            if (props.Get(11) != null)
-            {
-                if (props.Get(11).GetType().Name == "string")
-                {
-                    plist = (string)props.Get(11);
-                }
-                else if (props.Get(11).GetType().Name == "Byte[]")
-                {
-                    plist = System.Text.Encoding.ASCII.GetString((byte[])props.Get(11));
-                }
-                else
-                {
-                    plist = props.Get(11).ToString();
-                }
-            }
-
-            if (props.Get(12) != null)
-            {
-                if (props.Get(12).GetType().Name == "string")
-                {
-                    pdelim = (string)props.Get(12);
-                }
-                else if (props.Get(12).GetType().Name == "Byte[]")
-                {
-                    pdelim = System.Text.Encoding.ASCII.GetString((byte[])props.Get(12));
-                }
-                else
-                {
-                    pdelim = props.Get(12).ToString();
-                }
-            }
-
-            if (props.Get(13) != null)
-            {
-                if (props.Get(13).GetType().Name == "string")
-                {
-                    value = (string)props.Get(13);
-                }
-                else if (props.Get(13).GetType().Name == "Byte[]")
-                {
-                    value = System.Text.Encoding.ASCII.GetString((byte[])props.Get(13));
-                }
-                else
-                {
-                    value = props.Get(13).ToString();
-                }
-            }
+            p0 = PropGet(props, 1);
+            p1 = PropGet(props, 2);
+            p2 = PropGet(props, 3);
+            p3 = PropGet(props, 4);
+            p4 = PropGet(props, 5);
+            p5 = PropGet(props, 6);
+            p6 = PropGet(props, 7);
+            p7 = PropGet(props, 8);
+            p8 = PropGet(props, 9);
+            p9 = PropGet(props, 10);
+            plist = PropGet(props, 11);
+            pdelim = PropGet(props, 12);
+            value = PropGet(props, 13);
+            errorname = PropGet(props, 15);
 
             if (props.Get(14) != null)
             {
                 error = (int)props.Get(14);
-            }
-
-            if (props.Get(15) != null)
-            {
-                if (props.Get(15).GetType().Name == "string")
-                {
-                    errorname = (string)props.Get(15);
-                }
-                else if (props.Get(15).GetType().Name == "Byte[]")
-                {
-                    errorname = System.Text.Encoding.ASCII.GetString((byte[])props.Get(15));
-                }
-                else
-                {
-                    errorname = props.Get(15).ToString();
-                }
             }
 
             if (error == 1)
@@ -552,40 +378,69 @@ namespace cdapp
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get("PLIST") is string)
+            if (plist is string)
             {
-                string plist = (string)cd.Get("PLIST");
-                PLISTArray = plist.Split(cd.Get("PDELIM").ToString().ToCharArray());
+                if (pdelim is null)
+                {
+                    pdelim = "\r\n";
+                }
+
+                PLISTArray = plist.Split(pdelim.ToCharArray());
 
             }
             else {
-                if (cd.Get("PLIST") != null)
+                if (plist != null)
                 {
+                    if (pdelim is null)
+                   {
+                      pdelim = "\r\n";
+                   }
+                   if (plist != null && plist.Length > 0)
+                    {
+                        PLISTArray = plist.Split(pdelim.ToCharArray());
+                    }
 
-                   PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
                 }
 
             }
 
+            if (PLISTArray.Length >= index && PLISTArray[index - 1] != null)
+            {
+                return PLISTArray[index - 1];
+            }
+            else {
+                return "";
+            }
 
-            return PLISTArray[index - 1];
         }
         public long getPLISTLength()
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get("PLIST") is string)
+            if (plist is string)
             {
-                string plist = (string)cd.Get("PLIST");
-                PLISTArray = plist.Split(cd.Get("PDELIM").ToString().ToCharArray());
+                if (pdelim is null)
+                {
+                    pdelim = "\r\n";
+                }
+
+                PLISTArray = plist.Split(pdelim.ToCharArray());
 
             }
             else
             {
-                if (cd.Get("PLIST") != null)
+                if (plist != null)
                 {
 
-                    PLISTArray = cd.Get("PLIST").ToString().Split(cd.Get("PDELIM").ToString().ToCharArray());
+                    if (pdelim is null)
+                    {
+                        pdelim = "\r\n";
+                    }
+
+                    if (plist != null && plist.Length > 0)
+                    {
+                        PLISTArray = plist.Split(pdelim.ToCharArray());
+                    }
                 }
 
             }
@@ -597,43 +452,43 @@ namespace cdapp
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get("PLIST") is string)
+            if (plist is string)
             {
-                string plist = (string)cd.Get("PLIST");
-                PLISTArray = plist.ToString().Split((cd.Get("PDELIM").ToString().ToCharArray()));
+
+                if (pdelim is null)
+                {
+                    pdelim = "\r\n";
+                }
+
+                PLISTArray = plist.ToString().Split((pdelim.ToCharArray()));
             }
             else
             {
-                if (cd.Get("PLIST") != null)
+                if (plist != null)
                 {
 
-                    PLISTArray = cd.Get("PLIST").ToString().Split((cd.Get("PDELIM").ToString().ToCharArray()));
+                    if (pdelim is null)
+                    {
+                        pdelim = "\r\n";
+                    }
+
+                    if (plist != null && plist.Length > 0)
+                    {
+                        PLISTArray = plist.Split(pdelim.ToCharArray());
+                    }
                 }
             }
 
             if (index <= PLISTArray.Length)
             {
                 PLISTArray[index - 1] = replace;
-                cd.Set("PLIST", string.Join(cd.Get("PDELIM").ToString(), PLISTArray));
-            }
-
-            if (cd.Get("PLIST") is string)
-            {
-                plist = (string)cd.Get("PLIST");
-            }
-            else
-            {
-                if (cd.Get("PLIST") != null)
-                {
-                    plist = cd.Get("PLIST").ToString();
-                }
             }
 
             return true;
         }
-        public string Version
+        public static string Version
         {
-            get { return "V2.1"; }
+            get { return "V2.3"; }
         }
     }
 }
