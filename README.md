@@ -75,7 +75,6 @@ to run the sample
 - LogMask
 - MServer
 - MsgText
-- NameSpace
 - PromptInterval
 - Server
 - Tag
