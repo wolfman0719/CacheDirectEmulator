@@ -61,7 +61,6 @@ namespace cdapp
             set 
             { 
                 this.p0 = value;
-                this.cd.Set(nameof(P0), value);
             }
             get { return this.p0; }
         }
@@ -70,7 +69,6 @@ namespace cdapp
             set 
             { 
                 this.p1 = value;
-                this.cd.Set(nameof(P1), value);
             
             }
             get { return this.p1; }
@@ -80,7 +78,6 @@ namespace cdapp
             set 
             { 
                 this.p2 = value;
-                this.cd.Set(nameof(P2), value);
             }
             get { return this.p2; }
         }
@@ -89,7 +86,6 @@ namespace cdapp
             set 
             { 
                 this.p3 = value;
-                this.cd.Set(nameof(P3), value);
             }
             get { return this.p3; }
         }
@@ -98,7 +94,6 @@ namespace cdapp
             set 
             { 
                 this.p4 = value;
-                this.cd.Set(nameof(P4), value);
             }
             get { return this.p4; }
         }
@@ -107,7 +102,6 @@ namespace cdapp
             set 
             { 
                 this.p5 = value;
-                this.cd.Set(nameof(P5), value);
             }
             get { return this.p5; }
         }
@@ -116,7 +110,6 @@ namespace cdapp
             set 
             { 
                 this.p6 = value;
-                this.cd.Set(nameof(P6), value);
             }
             get { return this.p6; }
         }
@@ -125,7 +118,6 @@ namespace cdapp
             set 
             { 
                 this.p7 = value;
-                this.cd.Set(nameof(P7), value);
             }
             get { return this.p7; }
         }
@@ -134,7 +126,6 @@ namespace cdapp
             set 
             { 
                 this.p8 = value;
-                this.cd.Set(nameof(P8), value);
             }
             get { return this.p8; }
         }
@@ -143,7 +134,6 @@ namespace cdapp
             set 
             { 
                 this.p9 = value;
-                this.cd.Set(nameof(P9), value);
             }
             get { return this.p9; }
         }
@@ -152,7 +142,6 @@ namespace cdapp
             set 
             { 
                 this.plist = value;
-                this.cd.Set(nameof(PLIST), value);
             }
             get { return this.plist; }
         }
@@ -161,7 +150,6 @@ namespace cdapp
             set 
             { 
                 this.pdelim = value;
-                this.cd.Set(nameof(PDELIM), value);
             }
             get { return this.pdelim; }
         }
@@ -170,7 +158,6 @@ namespace cdapp
             set 
             { 
                 this.value = value;
-                this.cd.Set(nameof(VALUE), value);
             }
             get
             {
@@ -220,11 +207,10 @@ namespace cdapp
             set
             {
                 this.inamespace = value;
-                this.Execute("set $namespace=" + "" + value + "");
             }
             get
             {
-                return iris.ClassMethodString("CacheDirect.Emulator", "GetNamespace");
+                return this.inamespace;
             }
         }
         public long Interval
@@ -301,7 +287,7 @@ namespace cdapp
             }
         }
 
-        private string PropGet(IRISList props,int index)
+        private static string PropGet(IRISList props,int index)
         {
             string? result;
 
@@ -337,7 +323,24 @@ namespace cdapp
         {
             long status;
 
-            status = (long)cd.Invoke("Execute", command);
+            IRISList sendmessage = new();
+
+            sendmessage.Add(command);
+            sendmessage.Add(p0);
+            sendmessage.Add(p1);
+            sendmessage.Add(p2);
+            sendmessage.Add(p3);
+            sendmessage.Add(p4);
+            sendmessage.Add(p5);
+            sendmessage.Add(p6);
+            sendmessage.Add(p7);
+            sendmessage.Add(p8);
+            sendmessage.Add(p9);
+            sendmessage.Add(plist);
+            sendmessage.Add(pdelim);
+            sendmessage.Add(inamespace);
+
+            status = (long)cd.Invoke("Execute", sendmessage);
 
             props = cd.GetIRISList("PropsData");
 
@@ -375,10 +378,8 @@ namespace cdapp
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get(nameof(PLIST)) is string)
+            if (plist is string)
             {
-                string? plist = (string)cd.Get(nameof(PLIST));
-                string? pdelim = cd.Get(nameof(PDELIM)).ToString();
                 if (pdelim is null)
                 {
                     pdelim = "\r\n";
@@ -388,10 +389,8 @@ namespace cdapp
 
             }
             else {
-                if (cd.Get(nameof(PLIST)) != null)
+                if (plist != null)
                 {
-                    string? plist = cd.Get(nameof(PLIST)).ToString();
-                    string? pdelim = cd.Get(nameof(PDELIM)).ToString();
                     if (pdelim is null)
                    {
                       pdelim = "\r\n";
@@ -405,7 +404,7 @@ namespace cdapp
 
             }
 
-            if (PLISTArray[index - 1] != null)
+            if (PLISTArray.Length >= index && PLISTArray[index - 1] != null)
             {
                 return PLISTArray[index - 1];
             }
@@ -418,10 +417,8 @@ namespace cdapp
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get(nameof(PLIST)) is string)
+            if (plist is string)
             {
-                string plist = (string)cd.Get(nameof(PLIST));
-                string? pdelim = cd.Get(nameof(PDELIM)).ToString();
                 if (pdelim is null)
                 {
                     pdelim = "\r\n";
@@ -432,10 +429,8 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get(nameof(PLIST)) != null)
+                if (plist != null)
                 {
-                    string? plist = cd.Get(nameof(PLIST)).ToString();
-                    string? pdelim = cd.Get(nameof(PDELIM)).ToString();
 
                     if (pdelim is null)
                     {
@@ -457,10 +452,8 @@ namespace cdapp
         {
             string[] PLISTArray = { "" };
 
-            if (cd.Get(nameof(PLIST)) is string)
+            if (plist is string)
             {
-                string plist = (string)cd.Get(nameof(PLIST));
-                string pdelim = (string)cd.Get(nameof(PDELIM));
 
                 if (pdelim is null)
                 {
@@ -471,11 +464,8 @@ namespace cdapp
             }
             else
             {
-                if (cd.Get(nameof(PLIST)) != null)
+                if (plist != null)
                 {
-
-                    string? plist = cd.Get(nameof(PLIST)).ToString();
-                    string? pdelim = (string)cd.Get(nameof(PDELIM));
 
                     if (pdelim is null)
                     {
@@ -492,19 +482,6 @@ namespace cdapp
             if (index <= PLISTArray.Length)
             {
                 PLISTArray[index - 1] = replace;
-                cd.Set(nameof(PLIST), string.Join(cd.Get(nameof(PDELIM)).ToString(), PLISTArray));
-            }
-
-            if (cd.Get(nameof(PLIST)) is string)
-            {
-                plist = (string)cd.Get(nameof(PLIST));
-            }
-            else
-            {
-                if (cd.Get(nameof(PLIST)) != null)
-                {
-                    plist = cd.Get(nameof(PLIST)).ToString();
-                }
             }
 
             return true;
