@@ -84,7 +84,6 @@ Module1.vbは、このエミュレータを使用するVB.Netサンプルコー�
 - LogMask
 - MServer
 - MsgText
-- NameSpace
 - PromptInterval
 - Server
 - Tag
