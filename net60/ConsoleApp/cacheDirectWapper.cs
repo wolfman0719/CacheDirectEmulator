@@ -377,6 +377,8 @@ namespace cdapp
         public string getPLIST(int index)
         {
             string[] PLISTArray = { "" };
+            
+            if (index < 1) return "";
 
             if (plist is string)
             {
