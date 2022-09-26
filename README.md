@@ -112,6 +112,6 @@ cacheDirectWapper(string constr)
 
 cacheDirectWapper(IRISConnection irisconn)
 
-### Using Multiple Namespaces
+## Using Multiple Namespaces
 
 If you need to switch namespaces within your application, you must import CacheDirect.Emulator classes into each namespace or do package mapping.
