@@ -124,3 +124,6 @@ cacheDirectWapper(string constr)
 
 cacheDirectWapper(IRISConnection irisconn)
 
+### 複数ネームスペースでの利用
+
+アプリケーション内でネームスペースを切り替える必要がある場合には、CacheDirect.Emulatorクラスを各ネームスペースにインポートするか、パッケージマッピングを行う必要があります。
