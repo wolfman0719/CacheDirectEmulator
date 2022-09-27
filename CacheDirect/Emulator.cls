@@ -74,73 +74,72 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
 {
  try {
 	 
-	  set Command = $list(Message,1)
-	  set ..P0 = $list(Message,2)
-	  set ..P1 = $list(Message,3)
-	  set ..P2 = $list(Message,4)
-	  set ..P3 = $list(Message,5)
-	  set ..P4 = $list(Message,6)
-	  set ..P5 = $list(Message,7)
-	  set ..P6 = $list(Message,8)
-	  set ..P7 = $list(Message,9)
-	  set ..P8 = $list(Message,10)
-	  set ..P9 = $list(Message,11)
-	  set ..PDELIM = $list(Message,13)
-	 
+   set Command = $list(Message,1)
+   set ..P0 = $list(Message,2)
+   set ..P1 = $list(Message,3)
+   set ..P2 = $list(Message,4)
+   set ..P3 = $list(Message,5)
+   set ..P4 = $list(Message,6)
+   set ..P5 = $list(Message,7)
+   set ..P6 = $list(Message,8)
+   set ..P7 = $list(Message,9)
+   set ..P8 = $list(Message,10)
+   set ..P9 = $list(Message,11)
+   set ..PDELIM = $list(Message,13)
+	 	  
+   set P0=..P0
+   set P1=..P1
+   set P2=..P2
+   set P3=..P3
+   set P4=..P4
+   set P5=..P5
+   set P6=..P6
+   set P7=..P7
+   set P8=..P8
+   set P9=..P9
+   set PDELIM=..PDELIM
 	  
-     set P0=..P0
-     set P1=..P1
-     set P2=..P2
-     set P3=..P3
-     set P4=..P4
-     set P5=..P5
-     set P6=..P6
-     set P7=..P7
-     set P8=..P8
-     set P9=..P9
-     set PDELIM=..PDELIM
+   set ..PLIST = $list(Message,12)
+   set namespace = $list(Message,14)
 	  
-	  set ..PLIST = $list(Message,12)
-	  set namespace = $list(Message,14)
-	  
-     if (namespace '= "") && (namespace '= $namespace) {
-	     set $namespace = namespace
-     }
+   if (namespace '= "") && (namespace '= $namespace) {
+     set $namespace = namespace
+   }
      
-      set tPLIST=..PLIST
+   set tPLIST=..PLIST
 
-     if (tPLIST'="") && (tPLIST'= $char(0)) {
-        for i = 1:1:$length(tPLIST,PDELIM) {
-	      set PLIST(i) = $piece(tPLIST,PDELIM,i)
-        }
-      }
+   if (tPLIST'="") && (tPLIST'= $char(0)) {
+     for i = 1:1:$length(tPLIST,PDELIM) {
+       set PLIST(i) = $piece(tPLIST,PDELIM,i)
+     }
+   }
 
-	  if ($extract(Command,1) = "=") {		   
-         set ecommand="Set VALUE="_$extract(Command,2,*)
-	  }
-      elseif ($extract(Command,1) = "$") {
-         set ecommand="Set VALUE="_Command
-      }
-      else {
-	         set ecommand = Command
-      }
+   if ($extract(Command,1) = "=") {		   
+     set ecommand="Set VALUE="_$extract(Command,2,*)
+   }
+   elseif ($extract(Command,1) = "$") {
+     set ecommand="Set VALUE="_Command
+   }
+   else {
+     set ecommand = Command
+   }
       
-      set ..iErrorName = ""
-      set ..iError = 0
+   set ..iErrorName = ""
+   set ..iError = 0
  
-      xecute ecommand
+   xecute ecommand
       
-	  do ..PropertyRestore()
+   do ..PropertyRestore()
  }
  catch error {
-	 do ..PropertyRestore()
-	 set ..iErrorName = error.Name
-	 set ..iError = 1
-	 set ..ErrorStatus = error.AsStatus()
+   do ..PropertyRestore()
+   set ..iErrorName = error.Name
+   set ..iError = 1
+   set ..ErrorStatus = error.AsStatus()
  }
  if ..iError = 1 {
     kill P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,PLIST,PDELIM,VALUE
-	 quit '$$$OK
+    quit '$$$OK
  }
  
  kill P0,P1,P2,P3,P4,P5,P6,P7,P8,P9,PLIST,PDELIM,VALUE
@@ -193,7 +192,7 @@ ClassMethod GetNamespace() As %String
 
 ClassMethod Version() As %String
 {
-	quit "V2.3"
+	quit "V2.3.1"
 }
 
 ClassMethod Test()
@@ -202,9 +201,10 @@ ClassMethod Test()
 	set cd.P0 = "ABC;DEF;GHI"
 	set cd.P1 = ";"
 	set cd.PDELIM = ";"
-	do cd.Execute("=$piece(P0,P1,2)")
-	write "VALUE = ",cd.VALUE
-	write "ErrorStatus = ",$system.Status.DisplayError(cd.ErrorStatus)
+	set command = $listbuild("=$piece(P0,P1,2)",cd.P0,cd.P1,cd.P2,cd.P3,cd.P4,cd.P5,cd.P6,cd.P7,cd.P8,cd.P9,cd.PLIST,cd.PDELIM,$namespace)
+	do cd.Execute(command)
+	write "VALUE = ",cd.VALUE,!
+	if cd.iError write "ErrorStatus = ",$system.Status.DisplayError(cd.ErrorStatus)
 }
 
 }
