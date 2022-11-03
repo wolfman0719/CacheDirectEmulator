@@ -26,13 +26,13 @@ Version 16.6.0
 
 Add the following files to the project
 
-cacheDirectWapper.cs
-ConsoleApp.cs
+- cacheDirectWapper.cs
+- ConsoleApp.cs
 
 When building with Visual Studio 2022, add the following files
 
-net60/ConsoleApp/cacheDirectWapper.cs
-net60/ConsoleApp/ConsoleApp.cs
+- net60/ConsoleApp/cacheDirectWapper.cs
+- net60/ConsoleApp/ConsoleApp.cs
 
 ### reference setting
 
