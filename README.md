@@ -48,7 +48,7 @@ InterSystems.Data.IRISClient.dll
 
 ### Build
 
-Click Build C_SharpConsoleApplication from the Visual Studio build menu.
+Click Build from the Visual Studio build menu.
 
 Make sure there are no errors in the output window.
 
