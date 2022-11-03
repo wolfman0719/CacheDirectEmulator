@@ -7,9 +7,7 @@ VisM.OCXのインタフェースを.Net上で動作するようにIRISの.Net Na
 
 ### IRISサーバー
 
-使用バージョンは、IRIS for Windows (x86-64) 2020.1 (Build 215U) Mon Mar 30 2020 20:14:33 EDTです。
-
-2019.3ではヌルポインターエラーでクラッシュします。
+使用バージョンは、IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDTです。
 
 ### IRISサーバー側のクラス
 
@@ -17,7 +15,7 @@ CacheDirect.Emulator.clsを適当なネームスペースにインポート（�
 
 ### C#のプロジェクトファイルをVisual Studioで読み込む
 
-C_SharpConsoleApplication.csprojファイルをVisual Studioで読み込ます。
+Visual Studio 2019でConsole C# Applicationプロジェクトを新規作成します。
 
 使用したバージョンは、以下になります。
 
@@ -25,17 +23,31 @@ Microsoft Visual Studio Community 2019
 
 Version 16.6.0
 
+以下のファイルをそのプロジェクトに追加します。
+
+- cacheDirectWapper.cs
+- ConsoleApp.cs
+
+Microsoft Visual Studio Community 2022を使用する場合には、以下のファイルを追加します。
+
+- net60/ConsoleApp/cacheDirectWapper.cs
+- net60/ConsoleApp/ConsoleApp.cs
+
 ### 参照設定
 
 Visual Studioのプロジェクト設定から参照の追加を選び、以下のファイルを追加してください。
 
-c:\InterSystems\IRIS\dev\dotnet\bin\v4.5
+c:\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
+
+InterSystems.Data.IRISClient.dll
+
+c:\InterSystems\IRIS\dev\dotnet\bin\net6.0
 
 InterSystems.Data.IRISClient.dll
 
 ### ビルド
 
-Visual StudioのビルドメニューからC_SharpConsoleApplicationのビルドをクリック
+Visual Studioのビルドメニューからビルドをクリック
 
 出力ウィンドウにエラーがないことを確認してください。
 
