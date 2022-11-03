@@ -15,7 +15,7 @@ The version I tested this tool is IRIS for Windows (x86-64) 2022.2 (Build 368U) 
 Importing CacheDirect.Emulator.cls into the appropriate namespace.
 (The sample console application assumes that the namespace is USER)
 
-### Load C# Project file into Visual Studio
+### Create C# Project file in Visual Studio
 
 Create a Console C# application project in Visual Studio 2019.
 
