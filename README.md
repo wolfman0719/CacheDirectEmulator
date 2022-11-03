@@ -7,9 +7,8 @@ Implemented the VisM.OCX interface for .Net Applications using IRIS .Net Native 
 
 ### IRIS Server 
 
-The version used is IRIS for Windows (x86-64) 2020.1 (Build 215U) Mon Mar 30 2020 20:14:33 EDT.
+The version I tested this tool is IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDT
 
-In 2019.3 it will crash with a null pointer error.
 
 ### IRIS Server side class definition
 
@@ -18,18 +17,32 @@ Importing CacheDirect.Emulator.cls into the appropriate namespace.
 
 ### Load C# Project file into Visual Studio
 
-Load C_SharpConsoleApplication.csproj file into Visual Studio.
+Create a Console C# application project in Visual Studio 2019.
 
 The version I used is as follows.
 
 Microsoft Visual Studio Community 2019
 Version 16.6.0
 
+Add the following files to the project
+
+cacheDirectWapper.cs
+ConsoleApp.cs
+
+When building with Visual Studio 2022, add the following files
+
+net60/ConsoleApp/cacheDirectWapper.cs
+net60/ConsoleApp/ConsoleApp.cs
+
 ### reference setting
 
 Choose Add Reference from the project settings in Visual Studio and add the following files.
 
-<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.5
+<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
+
+InterSystems.Data.IRISClient.dll
+
+<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\net6.0
 
 InterSystems.Data.IRISClient.dll
 
