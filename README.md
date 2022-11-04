@@ -39,13 +39,13 @@ When building with Visual Studio 2022, add the following files
 
 Choose Add Reference from the project settings in Visual Studio and add the following files.
 
-<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
+<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
 
 InterSystems.Data.IRISClient.dll
 
 For Visual Studio 2022
   
-<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\net6.0
+<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\net6.0
 
 InterSystems.Data.IRISClient.dll
 
