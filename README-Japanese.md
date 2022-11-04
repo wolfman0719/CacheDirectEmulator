@@ -36,11 +36,7 @@ FrameworkのバージョンはV4.8を選択します。
 
 - Program.cs
 
-Microsoft Visual Studio Community 2022を使用する場合には、
-
-Microsoft Visual Studio Community 2022では、コンソールアプリプロジェクトを新規作成します。
-
-C# Linux macOS Windows コンソール
+Microsoft Visual Studio Community 2022では、コンソールアプリプロジェクト(C# Linux macOS Windows コンソール)を新規作成します。
 
 テストしたバージョンは、以下になります。
 
