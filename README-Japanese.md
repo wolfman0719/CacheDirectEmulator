@@ -63,7 +63,7 @@ Visual Studioのプロジェクト設定から参照の追加を選び、以下�
 Visual Studio 2019の場合
 
 ```
-c:\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
+<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
 
 InterSystems.Data.IRISClient.dll
 ```
@@ -71,7 +71,7 @@ InterSystems.Data.IRISClient.dll
 Visual Studio 2022の場合
 
 ```
-c:\InterSystems\IRIS\dev\dotnet\bin\net6.0
+<InstallDIr>\InterSystems\IRIS\dev\dotnet\bin\net6.0
 
 InterSystems.Data.IRISClient.dll
 ```
