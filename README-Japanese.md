@@ -1,4 +1,4 @@
-# .Net class mimics Cache Direct(VisM.OCX) interface for IRIS
+# Cache Direct(VisM.OCX)インタフェースをエミュレーションするIRIS用.NETクラス
 
 VisM.OCXのインタフェースを.Net上で動作するようにIRISの.Net Native APIを使用して実装
 
@@ -17,7 +17,7 @@ CacheDirect.Emulator.clsを適当なネームスペースにインポート（�
 
 Visual Studio 2019でコンソールアプリ(.NET Framework)プロジェクトを新規作成します。
 
-使用したバージョンは、以下になります。
+テストしたバージョンは、以下になります。
 
 Microsoft Visual Studio Community 2019
 
@@ -39,9 +39,10 @@ FrameworkのバージョンはV4.8を選択します。
 Microsoft Visual Studio Community 2022を使用する場合には、
 
 Microsoft Visual Studio Community 2022では、コンソールアプリプロジェクトを新規作成します。
+
 C# Linux macOS Windows コンソール
 
-使用したバージョンは、以下になります。
+テストしたバージョンは、以下になります。
 
 Microsoft Visual Studio Community 2022
 
