@@ -13,37 +13,71 @@ VisM.OCXのインタフェースを.Net上で動作するようにIRISの.Net Na
 
 CacheDirect.Emulator.clsを適当なネームスペースにインポート（サンプルはUSERネームスペースで動かすことを前提にしています）
 
-### C#のプロジェクトファイルをVisual Studioで読み込む
+### C#のプロジェクト作成
 
-Visual Studio 2019でConsole C# Applicationプロジェクトを新規作成します。
+Visual Studio 2019でコンソールアプリ(.NET Framework)プロジェクトを新規作成します。
 
 使用したバージョンは、以下になります。
 
 Microsoft Visual Studio Community 2019
 
-Version 16.6.0
+Version 16.11.15
+
+FrameworkのバージョンはV4.8を選択します。
 
 以下のファイルをそのプロジェクトに追加します。
+
+プロジェクト->既存の項目の追加
 
 - cacheDirectWapper.cs
 - ConsoleApp.cs
 
-Microsoft Visual Studio Community 2022を使用する場合には、以下のファイルを追加します。
+以下のファイルを削除します。
+
+- Program.cs
+
+Microsoft Visual Studio Community 2022を使用する場合には、
+
+Microsoft Visual Studio Community 2022では、コンソールアプリプロジェクトを新規作成します。
+C# Linux macOS Windows コンソール
+
+使用したバージョンは、以下になります。
+
+Microsoft Visual Studio Community 2022
+
+Version 17.0.1
+
+Frameworkのバージョンは.NET 6.0(長期的なサポート)を選択します。
+
+以下のファイルを追加します。
 
 - net60/ConsoleApp/cacheDirectWapper.cs
 - net60/ConsoleApp/ConsoleApp.cs
+
+以下のファイルを削除します。
+
+- Program.cs
+
 
 ### 参照設定
 
 Visual Studioのプロジェクト設定から参照の追加を選び、以下のファイルを追加してください。
 
+Visual Studio 2019の場合
+
+```
 c:\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
 
 InterSystems.Data.IRISClient.dll
+```
+
+```
+Visual Studio 2022の場合
 
 c:\InterSystems\IRIS\dev\dotnet\bin\net6.0
 
 InterSystems.Data.IRISClient.dll
+```
 
 ### ビルド
 
