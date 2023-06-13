@@ -7,7 +7,7 @@ VisM.OCXのインタフェースを.Net上で動作するようにIRISの.Net Na
 
 ### IRISサーバー
 
-使用バージョンは、IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDTです。
+テストしたIRISバージョンは、IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDTです。
 
 ### IRISサーバー側のクラス
 
