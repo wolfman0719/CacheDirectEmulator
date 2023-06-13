@@ -1,5 +1,7 @@
 # .Net class mimics Cache Direct(VisM.OCX) interface for IRIS
 
+日本語でのREADMEは、README-Japanese.mdを参照してください。
+
 Implemented the VisM.OCX interface for .Net Applications using IRIS .Net Native API .
 
 
