@@ -299,7 +299,7 @@ namespace cdapp
                 }
                 else if (props.Get(index).GetType().Name == "Byte[]")
                 {
-                    result = System.Text.Encoding.ASCII.GetString((byte[])props.Get(index));
+                    result = System.Text.Encoding.Latin1.GetString((byte[])props.Get(index));
                 }
                 else
                 {
@@ -490,7 +490,7 @@ namespace cdapp
         }
         public static string Version
         {
-            get { return "V2.3"; }
+            get { return "V2.3.1"; }
         }
     }
 }
