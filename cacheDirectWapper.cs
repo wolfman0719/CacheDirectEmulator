@@ -299,7 +299,7 @@ namespace cdapp
                 }
                 else if (props.Get(index).GetType().Name == "Byte[]")
                 {
-                    result = System.Text.Encoding.Latin1.GetString((byte[])props.Get(index));
+                    result = System.Text.Encoding.GetEncoding("ISO-8859-1").GetString((byte[])props.Get(index));
                 }
                 else
                 {
