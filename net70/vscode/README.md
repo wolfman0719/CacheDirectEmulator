@@ -6,6 +6,7 @@
 IRISの.netライブラリーの場所を環境に合わせる
 （テンプレートはMacOSの場合のディレクトリ構造を想定しています）
 
+'''
  <ItemGroup>
     <Reference Include="InterSystems.Data.Utils">
       <HintPath>..\..\..\..\..\Applications\iris\dev\dotnet\bin\net7.0\InterSystems.Data.Utils.dll</HintPath>
@@ -14,4 +15,5 @@ IRISの.netライブラリーの場所を環境に合わせる
       <HintPath>..\..\..\..\..\Applications\iris\dev\dotnet\bin\net7.0\InterSystems.Data.IRISClient.dll</HintPath>
     </Reference>
   </ItemGroup>
+  '''
 
