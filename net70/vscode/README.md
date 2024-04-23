@@ -15,5 +15,5 @@ IRISの.netライブラリーの場所を環境に合わせる
       <HintPath>..\..\..\..\..\Applications\iris\dev\dotnet\bin\net7.0\InterSystems.Data.IRISClient.dll</HintPath>
     </Reference>
   </ItemGroup>
-  '''
+'''
 
