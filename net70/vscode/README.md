@@ -19,7 +19,9 @@ IRISの.netライブラリーの場所を環境に合わせる
 ```
 # Emulator.clsをUserネームスペースにロード
 
-'''>d $system.OBJ.Load("/temp/Emulator.cls","ck")'''
+'''
+>d $system.OBJ.Load("/temp/Emulator.cls","ck")
+'''
 
 # Visual Studio Codeを起動し、プロジェクトを開く
 
