@@ -7,13 +7,16 @@ VisM.OCXのインタフェースを.Net上で動作するようにIRISの.Net Na
 
 ### IRISサーバー
 
-テストしたIRISバージョンは、IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDTです。
+IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDT以降のバージョンで動作可能です。
+2024.2以降は、.Net Framework(4.x)用のNative APIは同梱されません。
 
 ### IRISサーバー側のクラス
 
 CacheDirect.Emulator.clsを適当なネームスペースにインポート（サンプルはUSERネームスペースで動かすことを前提にしています）
 
 ### C#のプロジェクト作成
+
+### .Net Framework(V4.x)の場合
 
 Visual Studio 2019でコンソールアプリ(.NET Framework)プロジェクトを新規作成します。
 
@@ -36,6 +39,8 @@ FrameworkのバージョンはV4.8を選択します。
 
 - Program.cs
 
+### .NET 6.0以降
+
 Microsoft Visual Studio Community 2022では、コンソールアプリプロジェクト(C# Linux macOS Windows コンソール)を新規作成します。
 
 テストしたバージョンは、以下になります。
@@ -44,12 +49,12 @@ Microsoft Visual Studio Community 2022
 
 Version 17.0.1
 
-Frameworkのバージョンは.NET 6.0(長期的なサポート)を選択します。
+Frameworkのバージョンは.NET 8.0(長期的なサポート)を選択します。
 
 以下のファイルを追加します。
 
-- net60/ConsoleApp/cacheDirectWapper.cs
-- net60/ConsoleApp/ConsoleApp.cs
+- net60later/ConsoleApp/cacheDirectWapper.cs
+- net60later/ConsoleApp/ConsoleApp.cs
 
 以下のファイルを削除します。
 
@@ -71,7 +76,7 @@ InterSystems.Data.IRISClient.dll
 Visual Studio 2022の場合
 
 ```
-<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\net6.0
+<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\net8.0
 
 InterSystems.Data.IRISClient.dll
 ```
