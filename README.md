@@ -11,7 +11,7 @@ Implemented the VisM.OCX interface for .Net Applications using IRIS .Net Native 
 
 IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDT or later can work.
 
-Native API for .Net Framework (4.x) will not be included from 2024.2.
+Native API for .Net Framework (4.x) has not been included from 2024.2.
 
 ### IRIS Server side class definition
 
@@ -36,7 +36,7 @@ Add the following files to the project
 
 Delete Program.cs
 
-### .Net 6.0 or later
+#### .Net 6.0 or later
 
 When building with Visual Studio 2022, add the following files
 
@@ -44,6 +44,8 @@ When building with Visual Studio 2022, add the following files
 - net60later/ConsoleApp/ConsoleApp.cs
 
 ### reference setting
+
+#### for Visual Studio 2019
 
 Choose Add Reference from the project settings in Visual Studio and add the following files.
 
@@ -53,7 +55,7 @@ Choose Add Reference from the project settings in Visual Studio and add the foll
 InterSystems.Data.IRISClient.dll
 ```
 
-For Visual Studio 2022
+#### For Visual Studio 2022
 
 ```
 <InstallDir>\InterSystems\IRIS\dev\dotnet\bin\net8.0
@@ -77,7 +79,7 @@ If you get an error, there's something wrong with the reference settings being n
 
 ### for VB.Net
 
-Module1.vb is a samle VB.Net code to use the emulator.
+VB/Module1.vb is a samle VB.Net code to use the emulator.
 
 to run the sample
 
