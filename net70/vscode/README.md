@@ -17,11 +17,12 @@ IRISの.netライブラリーの場所を環境に合わせる
     </Reference>
   </ItemGroup>
 ```
+
 # Emulator.clsをUserネームスペースにロード
 
-'''
+```
 >d $system.OBJ.Load("/temp/Emulator.cls","ck")
-'''
+```
 
 # Visual Studio Codeを起動し、プロジェクトを開く
 
