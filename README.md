@@ -9,7 +9,9 @@ Implemented the VisM.OCX interface for .Net Applications using IRIS .Net Native 
 
 ### IRIS Server 
 
-The version I tested this tool is IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDT
+IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDT or later can work.
+
+Native API for .Net Framework (4.x) will not be included from 2024.2.
 
 ### IRIS Server side class definition
 
@@ -17,6 +19,8 @@ Importing CacheDirect.Emulator.cls into the appropriate namespace.
 (The sample console application assumes that the namespace is USER)
 
 ### Create C# Project file in Visual Studio
+
+#### .Net Framework(4.x)
 
 Create a Console C# application project in Visual Studio 2019.
 
@@ -27,15 +31,17 @@ Version 16.11.15
 
 Add the following files to the project
 
-- cacheDirectWapper.cs
-- ConsoleApp.cs
+- net4/ConsoleApp/cacheDirectWapper.cs
+- net4/ConsoleApp/ConsoleApp.cs
 
 Delete Program.cs
 
+### .Net 6.0 or later
+
 When building with Visual Studio 2022, add the following files
 
-- net60/ConsoleApp/cacheDirectWapper.cs
-- net60/ConsoleApp/ConsoleApp.cs
+- net60later/ConsoleApp/cacheDirectWapper.cs
+- net60later/ConsoleApp/ConsoleApp.cs
 
 ### reference setting
 
@@ -50,7 +56,7 @@ InterSystems.Data.IRISClient.dll
 For Visual Studio 2022
 
 ```
-<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\net6.0
+<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\net8.0
 
 InterSystems.Data.IRISClient.dll
 ```
@@ -80,7 +86,7 @@ to run the sample
 3. add references to InterSystems.Data.IRISClient.dll
 4. build the project
 4. create a VB.Net console application project
-5. add Module1.vb to the project
+5. add VB/Module1.vb to the project
 6. add references to InterSystems.Data.IRISClient.dll
 6. add refernce to the class library dll 
 
