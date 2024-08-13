@@ -32,8 +32,8 @@ FrameworkのバージョンはV4.8を選択します。
 
 プロジェクト->既存の項目の追加
 
-- cacheDirectWapper.cs
-- ConsoleApp.cs
+- net4/ConsoleApp/cacheDirectWapper.cs
+- net4/ConsoleApp/ConsoleApp.cs
 
 以下のファイルを削除します。
 
@@ -99,7 +99,7 @@ Visual Studioのデバッグメニューからデバッグの開始をクリッ�
 
 ### VB.Net用サンプル
 
-Module1.vbは、このエミュレータを使用するVB.Netサンプルコードです。
+VB/Module1.vbは、このエミュレータを使用するVB.Netサンプルコードです。
 
 このサンプルを動かすには、
 
@@ -113,7 +113,7 @@ Module1.vbは、このエミュレータを使用するVB.Netサンプルコー�
 
 5. VB.Net コンソールアプリケーションプロジェクトを作成します。
 
-6. Module1.vbをプロジェクトに追加します。
+6. VB/Module1.vbをプロジェクトに追加します。
 
 7. InterSystems.Data.IRISClient.dllの参照を追加します。
 
