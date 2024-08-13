@@ -128,18 +128,18 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
    set ..iError = 0
  
    //+++ 実行するコードの中で、出力先を指定せずにWriteを発行した場合にエラーとなるのを防ぐ
-   set curdev=$IO   ;; 現 Device を保持
+   set curdev=$IO   // 現 Device を保持
    //----- NULL Device にスイッチ (Write用) -----
    set nulldev=##class(%Device).GetNullDevice()
    open nulldev
    use nulldev
-   do ##class(%Device).ChangePrincipal() ;; SWITCH
+   do ##class(%Device).ChangePrincipal() // SWITCH
    //--- Write対応
    xecute ecommand
    //----- 元の Device (curdev) に戻す -----
    use curdev
-   do ##class(%Device).ChangePrincipal() ;; SWITCH
-   close nulldev  ;; NULL Device をClose
+   do ##class(%Device).ChangePrincipal() // SWITCH
+   close nulldev  // NULL Device をClose
       
    do ..PropertyRestore()
  }
