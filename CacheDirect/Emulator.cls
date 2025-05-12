@@ -47,27 +47,27 @@ Property ErrorStatus As %Status [ Private ];
 
 Method ErrorNameGet() As %String
 {
-	quit ..iErrorName
+  quit ..iErrorName
 }
 
 Method ErrorGet() As %Integer
 {
-	quit ..iError
+  quit ..iError
 }
 
 Method PropsDataGet() As %List
 {
-	quit $listbuild(..P0,..P1,..P2,..P3,..P4,..P5,..P6,..P7,..P8,..P9,..PLIST,..PDELIM,..VALUE,..Error,..ErrorName)
+  quit $listbuild(..P0,..P1,..P2,..P3,..P4,..P5,..P6,..P7,..P8,..P9,..PLIST,..PDELIM,..VALUE,..Error,..ErrorName)
 }
 
 Method getPLIST(offset As %Integer) As %String
 {
-	quit $piece(..PLIST,..PDELIM,offset)
+  quit $piece(..PLIST,..PDELIM,offset)
 }
 
 Method setPLIST(offset As %Integer, value As %String)
 {
-	set $piece(..PLIST,..PDELIM,offset) = value
+  set $piece(..PLIST,..PDELIM,offset) = value
 }
 
 Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, VALUE, Code) ]
@@ -161,62 +161,62 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
 
 Method PropertyRestore() As %Status [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, VALUE, Code) ]
 {
-      if $data(VALUE) set ..VALUE=VALUE
-      set ..P0 = $get(P0)
-      set ..P1 = $get(P1)
-      set ..P2 = $get(P2)
-      set ..P3 = $get(P3)
-      set ..P4 = $get(P4)
-      set ..P5 = $get(P5)
-      set ..P6 = $get(P6)
-      set ..P7 = $get(P7)
-      set ..P8 = $get(P8)
-      set ..P9 = $get(P9)
-      set ..PDELIM = $get(PDELIM)
-      set ..PLIST = ""
-      kill plist
-      set node = "",plistcount = 0
-      for {
-	      set node = $order(PLIST(node))
-	      if node = "" quit
-	      set plistcount = plistcount + 1
-	      set plist(plistcount) = PLIST(node)
-      }
-      if +$get(PLIST) = 0 {
-	     set PLIST = plistcount
-         for i = 1:1:PLIST {
-	       set PLISTS = $get(PLISTS)_PDELIM_$get(plist(i))
-         }
-         set ..PLIST = $extract($get(PLISTS),2,*)
-      }
-      else {
-         for i = 1:1:PLIST {
-	       set PLISTS = $get(PLISTS)_PDELIM_$get(PLIST(i))
-         }
-         set ..PLIST = $extract($get(PLISTS),2,*)
-      }
+  if $data(VALUE) set ..VALUE=VALUE
+  set ..P0 = $get(P0)
+  set ..P1 = $get(P1)
+  set ..P2 = $get(P2)
+  set ..P3 = $get(P3)
+  set ..P4 = $get(P4)
+  set ..P5 = $get(P5)
+  set ..P6 = $get(P6)
+  set ..P7 = $get(P7)
+  set ..P8 = $get(P8)
+  set ..P9 = $get(P9)
+  set ..PDELIM = $get(PDELIM)
+  set ..PLIST = ""
+  kill plist
+  set node = "",plistcount = 0
+  for {
+    set node = $order(PLIST(node))
+    if node = "" quit
+    set plistcount = plistcount + 1
+    set plist(plistcount) = PLIST(node)
+  }
+  if +$get(PLIST) = 0 {
+    set PLIST = plistcount
+    for i = 1:1:PLIST {
+      set PLISTS = $get(PLISTS)_PDELIM_$get(plist(i))
+    }
+    set ..PLIST = $extract($get(PLISTS),2,*)
+  }
+  else {
+    for i = 1:1:PLIST {
+      set PLISTS = $get(PLISTS)_PDELIM_$get(PLIST(i))
+    }
+    set ..PLIST = $extract($get(PLISTS),2,*)
+  }
 }
 
 ClassMethod GetNamespace() As %String
 {
-	quit $namespace
+  quit $namespace
 }
 
 ClassMethod Version() As %String
 {
-	quit "V2.3.1"
+  quit "V2.3.1"
 }
 
 ClassMethod Test()
 {
-	set cd = ..%New()
-	set cd.P0 = "ABC;DEF;GHI"
-	set cd.P1 = ";"
-	set cd.PDELIM = ";"
-	set command = $listbuild("=$piece(P0,P1,2)",cd.P0,cd.P1,cd.P2,cd.P3,cd.P4,cd.P5,cd.P6,cd.P7,cd.P8,cd.P9,cd.PLIST,cd.PDELIM,$namespace)
-	do cd.Execute(command)
-	write "VALUE = ",cd.VALUE,!
-	if cd.iError write "ErrorStatus = ",$system.Status.DisplayError(cd.ErrorStatus)
+  set cd = ..%New()
+  set cd.P0 = "ABC;DEF;GHI"
+  set cd.P1 = ";"
+  set cd.PDELIM = ";"
+  set command = $listbuild("=$piece(P0,P1,2)",cd.P0,cd.P1,cd.P2,cd.P3,cd.P4,cd.P5,cd.P6,cd.P7,cd.P8,cd.P9,cd.PLIST,cd.PDELIM,$namespace)
+  do cd.Execute(command)
+  write "VALUE = ",cd.VALUE,!
+  if cd.iError write "ErrorStatus = ",$system.Status.DisplayError(cd.ErrorStatus)
 }
 
 }
