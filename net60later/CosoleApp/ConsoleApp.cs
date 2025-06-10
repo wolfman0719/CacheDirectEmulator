@@ -43,6 +43,8 @@ namespace cdapp
                 cdw.ErrorEvent += OnError;
                 cdw.ExecuteEvent += Executed;
 
+                Debug.Print("Client Version = " + cacheDirectWapper.Version);
+
                 cdw.P0 = "ABC;DEF;GHI";
                 cdw.P1 = ";";
                 cdw.PDELIM = ";";
@@ -215,11 +217,23 @@ namespace cdapp
 
                 Debug.Print("set a = P00");
                 Debug.Print("ErrorName = " + cdw.ErrorName);
+                Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
                 Debug.Print("\n");
-                // Cleanup CachedirectWapper
+                
+                cdw.Timeout = 5;
+                cdw.Execute("=$zv");
+                Debug.Print("ErrorName = " + cdw.ErrorName);
+                Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
+                Debug.Print("\n");
 
+                cdw.Execute("set x=$zv h 10");
+                Debug.Print("ErrorName = " + cdw.ErrorName);
+                Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
+                Debug.Print("\n");
+                                
+                // Cleanup CachedirectWapper
                 cdw.end();
-                cdw2.end();
+                cdw2.Dispose();
             }
             finally
             {
