@@ -281,7 +281,7 @@ namespace cdapp
             try
             {
                 cd.Dispose();
-                conn.ReleaseIRISObjects()
+                conn.ReleaseIRISObjects();
                 conn.Close();
             }
             finally
