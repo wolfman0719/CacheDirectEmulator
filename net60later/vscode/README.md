@@ -3,7 +3,7 @@
 - .net 8.0 sdkをダウンロードしてインストール
 - Visual Studio Code にC# Dev Kitをインストール
 - cd8.csprojの内容を環境に合わせる
-- net60later/ConsoleAppの下のソースコードとcd8.csprojファイルを同じディレクトリに置く
+- net60later/の下のソースコード、ConsoleAppの下のソースコードとcd8.csprojファイルを同じディレクトリに置く
 
 IRISの.netライブラリーの場所を環境に合わせる
 （テンプレートはMacOSの場合のディレクトリ構造を想定しています）
