@@ -31,8 +31,8 @@ Version 16.11.15
 
 Add the following files to the project
 
-- net4/ConsoleApp/cacheDirectWapper.cs
-- net4/ConsoleApp/ConsoleApp.cs
+- net4/cacheDirectWapper.cs
+- ConsoleApp/ConsoleApp.cs
 
 Delete Program.cs
 
@@ -40,8 +40,8 @@ Delete Program.cs
 
 When building with Visual Studio 2022, add the following files
 
-- net60later/ConsoleApp/cacheDirectWapper.cs
-- net60later/ConsoleApp/ConsoleApp.cs
+- net60later/cacheDirectWapper.cs
+- ConsoleApp/ConsoleApp.cs
 
 ### reference setting
 
