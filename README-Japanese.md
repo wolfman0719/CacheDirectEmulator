@@ -33,8 +33,8 @@ FrameworkのバージョンはV4.8を選択します。
 
 プロジェクト->既存の項目の追加
 
-- net4/ConsoleApp/cacheDirectWapper.cs
-- net4/ConsoleApp/ConsoleApp.cs
+- net4/cacheDirectWapper.cs
+- ConsoleApp/ConsoleApp.cs
 
 以下のファイルを削除します。
 
@@ -54,8 +54,8 @@ Frameworkのバージョンは.NET 8.0(長期的なサポート)を選択しま�
 
 以下のファイルを追加します。
 
-- net60later/ConsoleApp/cacheDirectWapper.cs
-- net60later/ConsoleApp/ConsoleApp.cs
+- net60later/cacheDirectWapper.cs
+- ConsoleApp/ConsoleApp.cs
 
 以下のファイルを削除します。
 
