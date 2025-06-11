@@ -47,8 +47,6 @@ Property ErrorDetail As %String [ Calculated, ReadOnly ];
 
 Property Error As %Integer [ Calculated, ReadOnly ];
 
-Property Interval As %Integer;
-
 Property ErrorStatus As %Status [ Private ];
 
 Method ErrorNameGet() As %String
@@ -137,6 +135,7 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
     }
       
     set ..iErrorName = ""
+    set ..ErrorStatus = 1
     set ..iError = 0
  
     if timeout < 1 { 
@@ -160,12 +159,16 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
     }
     else {
       // タイムアウト検知用のイベント生成
-      // Create an Event for timeout
+      // Create an event for timeout
       set eventname="CDExecute"_$job
       do $system.Event.Create(eventname)
+      // timeoutの単位は、ミリ秒なので1000で割る
+      // the unit of timeout value is milisecond
+      
+      set timeout = timeout/1000
    
       // JOBにローカル変数を渡すためローカル変数を一時グローバルにコピーする
-      // Copy local variables to temp globals to pass them to Job command
+      // Copy local variables to temp Globals to pass the parameters to JOB
       kill ^IRISTempCDEmu($Job)
       set ^IRISTempCDEmu($Job,"P0")=$Get(P0)
       set ^IRISTempCDEmu($Job,"P1")=$Get(P1)
@@ -181,17 +184,17 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
       set ^IRISTempCDEmu($Job,"PDELIM")=$Get(PDELIM)
 
       // ジョブ起動を行う
-      // Job off the coomand
+      // Kickoff a job
       Job ..ExecuteJob(ecommand)
       set childpid=$ZChild
 
       // ジョブ起動した子ジョブがタイムアウト時間内で終了するのを待つ
-      // Waiting for the child process to finish within the timeout period
+      // Wait for the jobbed process to complete within the timeout period
       set ret=$system.Event.Wait(eventname,timeout)
    
      if ret=$$$OK {
        // 起動ジョブがタイムアウト以内で完了
-       // The jobbed process has finished with in the timeout period
+       // The jobbed process has been completed within the timeout period
        set VALUE=$Get(^IRISTempCDEmu($Job,"VALUE"))
        set P0=$Get(^IRISTempCDEmu($Job,"P0"))
        set P1=$Get(^IRISTempCDEmu($Job,"P1"))
@@ -218,10 +221,9 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
      }
 
      // ^IRISTempCDEmuとイベントのクリーンアップ
-     // Cleaning up ^IRISTempCDEmu and the event
+     // Crean up IRISTempCDEmu and the event
      kill ^IRISTempCDEmu($Job)
      do $system.Event.Delete(eventname)
-     // ----- TIMEOUT ----------------------------------------------------
    }  
  }    
  catch error {
@@ -327,6 +329,7 @@ ClassMethod Version() As %String
 
 ClassMethod Test() As %Status
 {
+  write ..Version(),!
   set cd = ..%New()
   set cd.P0 = "ABC;DEF;GHI"
   set cd.P1 = ";"
