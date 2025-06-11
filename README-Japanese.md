@@ -136,7 +136,6 @@ VB/Module1.vbは、このエミュレータを使用するVB.Netサンプルコ�
 - PromptInterval
 - Server
 - Tag
-- TimeOut
 
 ### サポートしていないメソッド
 
