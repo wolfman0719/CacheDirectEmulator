@@ -219,9 +219,12 @@ namespace cdapp
                 Debug.Print("ErrorName = " + cdw.ErrorName);
                 Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
                 Debug.Print("\n");
-                
-                cdw.Timeout = 5;
+
+                // timeoutはミリ秒が単位
+                // timeout is miliseocond based
+                cdw.TimeOut = 5000;
                 cdw.Execute("=$zv");
+                Debug.Print("VALUE = " + cdw.VALUE);
                 Debug.Print("ErrorName = " + cdw.ErrorName);
                 Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
                 Debug.Print("\n");
@@ -231,6 +234,11 @@ namespace cdapp
                 Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
                 Debug.Print("\n");
                                 
+                cdw.Execute("=##class(CacheDirect.Emulator).Version()");
+                Debug.Print("VALUE = " + cdw.VALUE);
+                Debug.Print("ErrorName = " + cdw.ErrorName);
+                Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
+                Debug.Print("\n");
                 // Cleanup CachedirectWapper
                 cdw.end();
                 cdw2.Dispose();
