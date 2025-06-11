@@ -160,10 +160,12 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
     }
     else {
       // タイムアウト検知用のイベント生成
+      // Create an Event for timeout
       set eventname="CDExecute"_$job
       do $system.Event.Create(eventname)
    
       // JOBにローカル変数を渡すためローカル変数を一時グローバルにコピーする
+      // Copy local variables to temp globals to pass them to Job command
       kill ^IRISTempCDEmu($Job)
       set ^IRISTempCDEmu($Job,"P0")=$Get(P0)
       set ^IRISTempCDEmu($Job,"P1")=$Get(P1)
@@ -179,14 +181,17 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
       set ^IRISTempCDEmu($Job,"PDELIM")=$Get(PDELIM)
 
       // ジョブ起動を行う
+      // Job off the coomand
       Job ..ExecuteJob(ecommand)
       set childpid=$ZChild
 
       // ジョブ起動した子ジョブがタイムアウト時間内で終了するのを待つ
+      // Waiting for the child process to finish within the timeout period
       set ret=$system.Event.Wait(eventname,timeout)
    
      if ret=$$$OK {
        // 起動ジョブがタイムアウト以内で完了
+       // The jobbed process has finished with in the timeout period
        set VALUE=$Get(^IRISTempCDEmu($Job,"VALUE"))
        set P0=$Get(^IRISTempCDEmu($Job,"P0"))
        set P1=$Get(^IRISTempCDEmu($Job,"P1"))
@@ -206,12 +211,14 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
      } 
      else {
        // タイムアウト発生!!
+       // Timeout has come!!
        set ..iError=1
        set ..iErrorName="<TIMEOUT> "
        set ..ErrorStatus=$$$ERROR($$$GeneralError,"Request timed out")
      }
 
      // ^IRISTempCDEmuとイベントのクリーンアップ
+     // Cleaning up ^IRISTempCDEmu and the event
      kill ^IRISTempCDEmu($Job)
      do $system.Event.Delete(eventname)
      // ----- TIMEOUT ----------------------------------------------------
