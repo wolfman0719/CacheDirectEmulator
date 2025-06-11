@@ -223,7 +223,7 @@ namespace cdapp
             }
             get { return this.interval; }
         }
-        public long Timeout
+        public long TimeOut
         {
             set
             {
