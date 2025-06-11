@@ -108,7 +108,6 @@ to run the sample
 - PromptInterval
 - Server
 - Tag
-- TimeOut
 
 ### Unsupported Method
 
