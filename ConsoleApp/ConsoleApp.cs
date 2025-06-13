@@ -45,6 +45,10 @@ namespace cdapp
 
                 Debug.Print("Client Version = " + cacheDirectWapper.Version);
 
+                cdw.Execute("=##class(CacheDirect.Emulator).Version()");
+                Debug.Print("Server Version = " + cdw.VALUE);
+                Debug.Print("\n");
+
                 cdw.P0 = "ABC;DEF;GHI";
                 cdw.P1 = ";";
                 cdw.PDELIM = ";";
@@ -166,13 +170,16 @@ namespace cdapp
                 Debug.Print("ErrorName = " + cdw.ErrorName);
                 Debug.Print("\n");
 
-                Debug.Print("wait for 5 seconds ");
+                Debug.Print("Wait 5 seconds before executing the following code");
+                Debug.Print("以下のコードを実行するまで5秒待つ");
                 cdw.Code = "set P0=23456";
                 cdw.Interval = 5000;
                 cdw.ExecFlag = 3;
 
                 Console.WriteLine("Waiting for 5 seconds till the timer expires ");
-                Console.WriteLine("If 5 seconds passed, Please press any key");
+                Console.WriteLine("タイマーが経過するまで5秒待つ ");
+                Console.WriteLine("Press the return key after 5 seconds have passed");
+                Console.WriteLine("5秒経過したらリターンキーを押してください");
                 Console.ReadLine();
 
                 Debug.Print("set P0=23456");
@@ -234,11 +241,6 @@ namespace cdapp
                 Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
                 Debug.Print("\n");
                                 
-                cdw.Execute("=##class(CacheDirect.Emulator).Version()");
-                Debug.Print("VALUE = " + cdw.VALUE);
-                Debug.Print("ErrorName = " + cdw.ErrorName);
-                Debug.Print("ErrorDetail = " + cdw.ErrorDetail);
-                Debug.Print("\n");
                 // Cleanup CachedirectWapper
                 cdw.end();
                 cdw2.Dispose();
