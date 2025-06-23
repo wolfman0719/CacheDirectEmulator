@@ -11,7 +11,7 @@ Implemented the VisM.OCX interface for .Net Applications using IRIS .Net Native 
 
 IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDT or later can work.
 
-Native API for .Net Framework (4.x) has not been included from 2024.2.
+Native API for .Net Framework (4.x) will be removed in the future versions.
 
 ### IRIS Server side class definition
 
