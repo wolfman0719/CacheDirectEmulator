@@ -209,6 +209,10 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
        set PLIST=$Get(^IRISTempCDEmu($Job,"PLIST"))
        set PDELIM=$Get(^IRISTempCDEmu($Job,"PDELIM"))
        set VALUE=$Get(^IRISTempCDEmu($Job,"VALUE"))
+       set ..iError = $Get(^IRISTempCDEmu($Job,"Error"))
+       set ..iErrorName = $Get(^IRISTempCDEmu($Job,"ErrorName"))
+       set ..ErrorStatus = $Get(^IRISTempCDEmu($Job,"ErrorStatus"))
+
        do ..PropertyRestore()
 
      } 
@@ -244,39 +248,47 @@ Method Execute(Message As %List) As %Boolean [ PublicList = (P0, P1, P2, P3, P4,
 
 ClassMethod ExecuteJob(Command As %String) [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, VALUE, Code) ]
 {
-   set parentpid=$ZParent
-   set eventname="CDExecute"_parentpid
-   set P0=$Get(^IRISTempCDEmu(parentpid,"P0"))
-   set P1=$Get(^IRISTempCDEmu(parentpid,"P1"))
-   set P2=$Get(^IRISTempCDEmu(parentpid,"P2"))
-   set P3=$Get(^IRISTempCDEmu(parentpid,"P3"))
-   set P4=$Get(^IRISTempCDEmu(parentpid,"P4"))
-   set P5=$Get(^IRISTempCDEmu(parentpid,"P5"))
-   set P6=$Get(^IRISTempCDEmu(parentpid,"P6"))
-   set P7=$Get(^IRISTempCDEmu(parentpid,"P7"))
-   set P8=$Get(^IRISTempCDEmu(parentpid,"P8"))
-   set P9=$Get(^IRISTempCDEmu(parentpid,"P9"))
-   set PLIST=$Get(^IRISTempCDEmu(parentpid,"PLIST"))
-   set PDELIM=$Get(^IRISTempCDEmu(parentpid,"PDELIM"))
+ try {
+    set parentpid=$ZParent
+    set eventname="CDExecute"_parentpid
+    set P0=$Get(^IRISTempCDEmu(parentpid,"P0"))
+    set P1=$Get(^IRISTempCDEmu(parentpid,"P1"))
+    set P2=$Get(^IRISTempCDEmu(parentpid,"P2"))
+    set P3=$Get(^IRISTempCDEmu(parentpid,"P3"))
+    set P4=$Get(^IRISTempCDEmu(parentpid,"P4"))
+    set P5=$Get(^IRISTempCDEmu(parentpid,"P5"))
+    set P6=$Get(^IRISTempCDEmu(parentpid,"P6"))
+    set P7=$Get(^IRISTempCDEmu(parentpid,"P7"))
+    set P8=$Get(^IRISTempCDEmu(parentpid,"P8"))
+    set P9=$Get(^IRISTempCDEmu(parentpid,"P9"))
+    set PLIST=$Get(^IRISTempCDEmu(parentpid,"PLIST"))
+    set PDELIM=$Get(^IRISTempCDEmu(parentpid,"PDELIM"))
 
-   xecute Command
+    xecute Command
 
-   set ^IRISTempCDEmu(parentpid,"P0")=P0
-   set ^IRISTempCDEmu(parentpid,"P1")=P1
-   set ^IRISTempCDEmu(parentpid,"P2")=P2
-   set ^IRISTempCDEmu(parentpid,"P3")=P3
-   set ^IRISTempCDEmu(parentpid,"P4")=P4
-   set ^IRISTempCDEmu(parentpid,"P5")=P5
-   set ^IRISTempCDEmu(parentpid,"P6")=P6
-   set ^IRISTempCDEmu(parentpid,"P7")=P7
-   set ^IRISTempCDEmu(parentpid,"P8")=P8
-   set ^IRISTempCDEmu(parentpid,"P9")=P9
-   set ^IRISTempCDEmu(parentpid,"PLIST")=PLIST
-   set ^IRISTempCDEmu(parentpid,"PDELIM")=PDELIM
-   set ^IRISTempCDEmu(parentpid,"VALUE")=VALUE
-   
-   do $system.Event.Signal(eventname)
-   Quit
+    set ^IRISTempCDEmu(parentpid,"P0")=P0
+    set ^IRISTempCDEmu(parentpid,"P1")=P1
+    set ^IRISTempCDEmu(parentpid,"P2")=P2
+    set ^IRISTempCDEmu(parentpid,"P3")=P3
+    set ^IRISTempCDEmu(parentpid,"P4")=P4
+    set ^IRISTempCDEmu(parentpid,"P5")=P5
+    set ^IRISTempCDEmu(parentpid,"P6")=P6
+    set ^IRISTempCDEmu(parentpid,"P7")=P7
+    set ^IRISTempCDEmu(parentpid,"P8")=P8
+    set ^IRISTempCDEmu(parentpid,"P9")=P9
+    set ^IRISTempCDEmu(parentpid,"PLIST")=PLIST
+    set ^IRISTempCDEmu(parentpid,"PDELIM")=PDELIM
+    set ^IRISTempCDEmu(parentpid,"VALUE")=VALUE
+    set ^IRISTempCDEmu(parentpid,"Error")=0    
+
+  }
+  catch error {
+    set ^IRISTempCDEmu(parentpid,"Error")=1
+    set ^IRISTempCDEmu(parentpid,"ErrorName")=error.Name
+    set ^IRISTempCDEmu(parentpid,"ErrorStatus") = error.AsStatus()
+  }
+
+  do $system.Event.Signal(eventname)
 }
 
 Method PropertyRestore() As %Status [ PublicList = (P0, P1, P2, P3, P4, P5, P6, P7, P8, P9, PLIST, PDELIM, VALUE, Code) ]
