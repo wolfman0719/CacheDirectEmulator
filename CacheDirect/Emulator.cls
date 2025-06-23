@@ -336,7 +336,7 @@ ClassMethod GetNamespace() As %String
 
 ClassMethod Version() As %String
 {
-  quit "V2.4.1"
+  quit "V2.4.2"
 }
 
 ClassMethod Test() As %Status
