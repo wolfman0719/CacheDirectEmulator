@@ -16,6 +16,7 @@ Native API for .Net Framework (4.x) has not been included from 2024.2.
 ### IRIS Server side class definition
 
 Importing CacheDirect.Emulator.cls into the appropriate namespace.
+
 (The sample console application assumes that the namespace is USER)
 
 ### Create C# Project file in Visual Studio
