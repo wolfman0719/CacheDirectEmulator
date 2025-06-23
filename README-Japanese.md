@@ -9,7 +9,7 @@ VisM.OCXのインタフェースを.Net上で動作するようにIRISの.Net Na
 
 IRIS for Windows (x86-64) 2022.2 (Build 368U) Fri Oct 21 2022 16:43:20 EDT以降のバージョンで動作可能です。
 
-2024.2以降は、.Net Framework(4.x)用のNative APIは同梱されません。
+今後　.Net Framework(4.x)用のNative APIは同梱されなくなる予定です。
 
 ### IRISサーバー側のクラス
 
