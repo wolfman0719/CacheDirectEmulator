@@ -507,7 +507,7 @@ namespace cdapp
         }
         public static string Version
         {
-            get { return "V2.4.1"; }
+            get { return "V2.4.2"; }
         }
     }
 }
