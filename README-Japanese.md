@@ -58,6 +58,14 @@ Visual Studio 2019の場合
 InterSystems.Data.IRISClient.dll
 ```
 
+Visual Studio 2022の場合
+
+```
+<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\v8.0
+
+InterSystems.Data.IRISClient.dll
+```
+
 ### .NET 6.0以降
 
 #### Windows 11
