@@ -17,11 +17,11 @@ CacheDirect.Emulator.clsを適当なネームスペースにインポート（�
 
 ### C#のプロジェクト作成
 
-### .Net Framework(V4.x)の場合
+#### .Net Framework(V4.x)の場合
 
 Visual Studio 2019でコンソールアプリ(.NET Framework)プロジェクトを新規作成します。
 
-#### IDE
+##### IDE
 
 テストしたバージョンは、以下になります。
 
@@ -29,11 +29,11 @@ Microsoft Visual Studio Community 2019
 
 Version 16.11.15
 
-#### .NET Framework Version
+##### .NET Framework Version
 
 FrameworkのバージョンはV4.8を選択します。
 
-#### ファイル構成
+##### ファイル構成
 
 以下のファイルをそのプロジェクトに追加します。
 
@@ -46,7 +46,7 @@ FrameworkのバージョンはV4.8を選択します。
 
 - Program.cs
 
-#### 参照設定
+##### 参照設定
 
 Visual Studioのプロジェクト設定から参照の追加を選び、以下のファイルを追加してください。
 
@@ -58,19 +58,11 @@ Visual Studio 2019の場合
 InterSystems.Data.IRISClient.dll
 ```
 
-Visual Studio 2022の場合
+#### .NET 6.0以降
 
-```
-<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\v8.0
+##### Windows
 
-InterSystems.Data.IRISClient.dll
-```
-
-### .NET 6.0以降
-
-#### Windows 11
-
-##### IDE
+###### IDE
 
 Microsoft Visual Studio Community 2022では、コンソールアプリプロジェクト(C# Linux macOS Windows コンソール)を新規作成します。
 
@@ -80,7 +72,7 @@ Microsoft Visual Studio Community 2022
 
 Version 17.0.1
 
-##### .NET Framework Version
+###### .NET Framework Version
 
 Frameworkのバージョンは.NET 8.0(長期的なサポート)を選択します。
 
@@ -93,7 +85,7 @@ Frameworkのバージョンは.NET 8.0(長期的なサポート)を選択しま�
 
 - Program.cs
 
-##### 参照設定
+###### 参照設定
 
 Visual Studioのプロジェクト設定から参照の追加を選び、以下のファイルを追加してください。
 
@@ -105,17 +97,17 @@ Visual Studio 2022の場合
 InterSystems.Data.IRISClient.dll
 ```
 
-#### MacOS
+##### MacOS
 
-##### IDE
+###### IDE
 
 Visual Studio Code + C# Dev Kit
 
-##### .NET Framework Version
+###### .NET Framework Version
 
 Frameworkのバージョンは.NET 8.0または.NET 10.0を選択します。
 
-#### プロジェクトファイル
+###### プロジェクトファイル
 
 ファイルの内容について環境依存の部分（ファイルのディレクトリ構造）があるので、環境に合わせて適宜変更してください。
 
@@ -124,7 +116,7 @@ Frameworkのバージョンは.NET 8.0または.NET 10.0を選択します。
 
 ### ビルド
 
-Visual Studioのビルドメニューからビルドをクリック
+Visual Studio(VS Code)のビルドメニューからビルドをクリック
 
 出力ウィンドウにエラーがないことを確認してください。
 
