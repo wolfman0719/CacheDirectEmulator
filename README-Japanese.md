@@ -89,14 +89,6 @@ Frameworkのバージョンは.NET 8.0(長期的なサポート)を選択しま�
 
 Visual Studioのプロジェクト設定から参照の追加を選び、以下のファイルを追加してください。
 
-Visual Studio 2019の場合
-
-```
-<InstallDir>\InterSystems\IRIS\dev\dotnet\bin\v4.6.2
-
-InterSystems.Data.IRISClient.dll
-```
-
 Visual Studio 2022の場合
 
 ```
